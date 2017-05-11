@@ -11,19 +11,19 @@ using System.Threading;
 
 namespace Recognator
 {
-   public partial class LicensePlateRecognitionForm : Form
+   public partial class RecognatorForm : Form
    {
-      private LicensePlateDetector _licensePlateDetector;
+      private RecognatorBrains _licensePlateDetector;
         Capture capture;
         Mat m;
         _AddLabelAndImage _addLabelAndImage;
         _ClearPanel _clearPanel;
         private bool isStarted = false;
 
-        public LicensePlateRecognitionForm()
+        public RecognatorForm()
         {
             InitializeComponent();
-            _licensePlateDetector = new LicensePlateDetector();
+            _licensePlateDetector = new RecognatorBrains();
             capture = new Capture("http://sedgusev:170396@192.168.0.3:8080/video");
             _addLabelAndImage = new _AddLabelAndImage(AddLabelAndImage);
             _clearPanel = new _ClearPanel(clearPanel);

@@ -1,6 +1,6 @@
 namespace Recognator
 {
-    partial class LicensePlateRecognitionForm
+    partial class RecognatorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -45,6 +45,7 @@ namespace Recognator
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
@@ -88,7 +89,6 @@ namespace Recognator
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.SystemColors.Control;
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.processTimeLabel);
             this.panel2.Controls.Add(this.informationLabel);
@@ -182,6 +182,7 @@ namespace Recognator
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

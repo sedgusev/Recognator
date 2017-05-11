@@ -16,7 +16,7 @@ namespace Recognator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LicensePlateRecognitionForm());
+            Application.Run(new RecognatorForm());
         }
     }
 }

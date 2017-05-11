@@ -12,11 +12,11 @@ using System.IO;
 
 namespace Recognator
 {
-    public class LicensePlateDetector : DisposableObject
+    public class RecognatorBrains : DisposableObject
     {
         private Emgu.CV.OCR.Tesseract _ocr;
         
-        public LicensePlateDetector()
+        public RecognatorBrains()
         {
 
             //_ocr = new Emgu.CV.OCR.Tesseract("C:/Users/sedgu/Documents/emgucv-windesktop 3.2.0.2682/Emgu.CV.Example/LicensePlateRecognition/obj/Debug/tessdata", "eng", OcrEngineMode.TesseractOnly);
