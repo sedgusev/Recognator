@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Emgu.CV;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +14,7 @@ namespace Recognator
 {
     public partial class LoadForm : Form
     {
-        CaptureHolder ch;
+        Capture capture;
         RecognatorForm rf;
         private bool flag;
 
@@ -64,11 +65,12 @@ namespace Recognator
 
         private void processWorker(object sender, DoWorkEventArgs e)
         {
-            if(flag) ch = new CaptureHolder("http://" + USER + ":" + PASSWORD + "@" + IP + ":" + PORT + "/video");
-            if (!flag) ch = new CaptureHolder("");
-            if (ch.GetCapture.QueryFrame() != null)
+            if (capture != null) capture.Dispose();
+            if (flag) capture = new Capture("http://" + USER + ":" + PASSWORD + "@" + IP + ":" + PORT + "/video");
+            if (!flag) capture = new Capture("960.jpg");
+            if (capture.QueryFrame() != null)
             {
-                rf = new RecognatorForm(ch.GetCapture);
+                rf = new RecognatorForm(capture);
                 rf.FormClosed += (a, b) =>
                 {
                     this.Close();

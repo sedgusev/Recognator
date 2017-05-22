@@ -51,6 +51,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
             this.detectWorker = new System.ComponentModel.BackgroundWorker();
+            this.materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
+            this.stop_button = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,6 +63,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stop_button)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -78,8 +81,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(1036, 499);
-            this.splitContainer1.SplitterDistance = 283;
+            this.splitContainer1.Size = new System.Drawing.Size(997, 499);
+            this.splitContainer1.SplitterDistance = 272;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel1
@@ -103,21 +106,28 @@
             // 
             // plateRegion_textBox
             // 
+            this.plateRegion_textBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.plateRegion_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.plateRegion_textBox.Enabled = false;
             this.plateRegion_textBox.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.plateRegion_textBox.Location = new System.Drawing.Point(204, 23);
             this.plateRegion_textBox.Name = "plateRegion_textBox";
+            this.plateRegion_textBox.ReadOnly = true;
             this.plateRegion_textBox.Size = new System.Drawing.Size(41, 23);
             this.plateRegion_textBox.TabIndex = 2;
             // 
             // plateMain_textBox
             // 
+            this.plateMain_textBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.plateMain_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.plateMain_textBox.Enabled = false;
             this.plateMain_textBox.Font = new System.Drawing.Font("Consolas", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.plateMain_textBox.Location = new System.Drawing.Point(24, 23);
             this.plateMain_textBox.Name = "plateMain_textBox";
+            this.plateMain_textBox.ReadOnly = true;
             this.plateMain_textBox.Size = new System.Drawing.Size(155, 38);
             this.plateMain_textBox.TabIndex = 1;
+            this.plateMain_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // plateNumber
             // 
@@ -143,9 +153,9 @@
             this.login_panel.Controls.Add(this.passw_textBox);
             this.login_panel.Controls.Add(this.label3);
             this.login_panel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.login_panel.Location = new System.Drawing.Point(5, 151);
+            this.login_panel.Location = new System.Drawing.Point(7, 151);
             this.login_panel.Name = "login_panel";
-            this.login_panel.Size = new System.Drawing.Size(275, 214);
+            this.login_panel.Size = new System.Drawing.Size(273, 214);
             this.login_panel.TabIndex = 1;
             // 
             // test_checkBox
@@ -241,12 +251,13 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Maroon;
+            this.panel2.Controls.Add(this.stop_button);
             this.panel2.Controls.Add(this.workStatus);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(749, 499);
+            this.panel2.Size = new System.Drawing.Size(721, 499);
             this.panel2.TabIndex = 3;
             // 
             // workStatus
@@ -259,7 +270,7 @@
             this.workStatus.InnerColor = System.Drawing.Color.WhiteSmoke;
             this.workStatus.InnerMargin = 2;
             this.workStatus.InnerWidth = -1;
-            this.workStatus.Location = new System.Drawing.Point(327, 413);
+            this.workStatus.Location = new System.Drawing.Point(3, 456);
             this.workStatus.MarqueeAnimationSpeed = 2000;
             this.workStatus.Name = "workStatus";
             this.workStatus.OuterColor = System.Drawing.Color.Maroon;
@@ -288,7 +299,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(3, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(466, 280);
+            this.pictureBox1.Size = new System.Drawing.Size(706, 444);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
@@ -311,12 +322,22 @@
             this.detectWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.processWorker);
             this.detectWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.completeWorker);
             // 
+            // stop_button
+            // 
+            this.stop_button.Location = new System.Drawing.Point(62, 463);
+            this.stop_button.Name = "stop_button";
+            this.stop_button.Size = new System.Drawing.Size(99, 30);
+            this.stop_button.TabIndex = 16;
+            this.stop_button.Text = "СТОП";
+            this.stop_button.ThemeName = "Material";
+            this.stop_button.Click += new System.EventHandler(this.stop_button_Click);
+            // 
             // RecognatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Maroon;
-            this.ClientSize = new System.Drawing.Size(1036, 499);
+            this.ClientSize = new System.Drawing.Size(997, 499);
             this.Controls.Add(this.splitContainer1);
             this.Name = "RecognatorForm";
             this.Text = "Recognator";
@@ -333,6 +354,7 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stop_button)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -361,5 +383,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.ComponentModel.BackgroundWorker detectWorker;
         private CircularProgressBar.CircularProgressBar workStatus;
+        private Telerik.WinControls.UI.RadButton stop_button;
+        private Telerik.WinControls.Themes.MaterialTheme materialTheme1;
     }
 }

@@ -48,7 +48,10 @@ namespace Recognator
                 workStatus.Visible = true;
             };
         }
-
+        private void formLoad(object sender, EventArgs e)
+        {
+            Application.Idle += getFrame;
+        }
 
         private delegate void _ClearPanel();
         private void clearPanel()
@@ -98,10 +101,11 @@ namespace Recognator
         private void AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch)
       {
             Label label = new Label();
-
+            labelText = labelText.Replace(" ", "");
             string str = regex.Match(labelText).ToString();
             plateMain_textBox.Text = regex.Match(labelText).ToString();
-            plateRegion_textBox.Text = regex2.Match(labelText).ToString();
+            string str2 = Regex.Replace(labelText, str, String.Empty);
+            plateRegion_textBox.Text = regex2.Match(str2).ToString();
 
 
             startPoint.Y += plateNumber.Height + 100;
@@ -121,25 +125,21 @@ namespace Recognator
         {
             try
             {
-                if (capture.QueryFrame() != null)
+                m = capture.QueryFrame();
+                displayImage(m.Bitmap);
+                if (!detectWorker.IsBusy)
                 {
-                    m = capture.QueryFrame();
-                    displayImage(m.Bitmap);
-                    if (!detectWorker.IsBusy)
+                    if (!detectWorker.CancellationPending)
                     {
-                        if (!detectWorker.CancellationPending)
-                        {
-                            detectWorker.RunWorkerAsync();
-                        }
+                        detectWorker.RunWorkerAsync();
                     }
                 }
-
-                else displayImage(Properties.Resources.test);
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException e)
             {
                 Application.Idle -= getFrame;
                 capture.Stop();
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -166,9 +166,6 @@ namespace Recognator
         }
 
 
-
-
-
         #region Worker
         private void startDetect()
         {
@@ -184,14 +181,30 @@ namespace Recognator
         {
             workStatus.Visible = false;
         }
+
+
+
         #endregion
 
-        private void formLoad(object sender, EventArgs e)
+        private void stop_button_Click(object sender, EventArgs e)
         {
-            Application.Idle += getFrame;
+            if (stop_button.Text == "—“¿–“")
+            {
+                if (!detectWorker.IsBusy)
+                {
+                    stop_button.Text = "—“Œœ";
+                    detectWorker.RunWorkerAsync();
+                }
+            }
+            if (stop_button.Text == "—“Œœ")
+            {
+                if (!detectWorker.CancellationPending)
+                {
+                    detectWorker.CancelAsync();
+                    stop_button.Text = "—“¿–“";
+                }
+            }
         }
-
-        
     }
 
 }
