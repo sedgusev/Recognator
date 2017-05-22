@@ -8,47 +8,61 @@ using Emgu.CV.UI;
 using System.Diagnostics;
 using Emgu.CV.Util;
 using System.Threading;
+using System.Text.RegularExpressions;
+using System.ComponentModel;
 
 namespace Recognator
 {
    public partial class RecognatorForm : Form
    {
-      private RecognatorBrains _licensePlateDetector;
-        Capture capture;
+        private RecognatorBrains _recognator;
+        Emgu.CV.Capture capture;
         Mat m;
         _AddLabelAndImage _addLabelAndImage;
         _ClearPanel _clearPanel;
-        private bool isStarted = false;
+        Regex regex;
+        Regex regex2;
+        string pattern = @"[A-Z][0-9][0-9][0-9][A-Z][A-Z]";
+        string pattern2 = @"[0-9]{2,3}";
+        Thread detect;
 
-        public RecognatorForm()
+        public RecognatorForm(Emgu.CV.Capture capture)
         {
+            this.capture = capture;
             InitializeComponent();
-            _licensePlateDetector = new RecognatorBrains();
-            capture = new Capture("http://sedgusev:170396@192.168.0.3:8080/video");
+            initialLocals();
+
+            //login_textBox.Text = "sedgusev";
+            //passw_textBox.Text = "170396";
+            //ip_textBox.Text = "192.168.0.2";
+            //port_textBox.Text = "8080";
+        }
+        private void initialLocals()
+        {
+            _recognator = new RecognatorBrains();
             _addLabelAndImage = new _AddLabelAndImage(AddLabelAndImage);
             _clearPanel = new _ClearPanel(clearPanel);
+            regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            regex2 = new Regex(pattern2, RegexOptions.IgnoreCase);
+            detectWorker.ProgressChanged += (a, b) => {
+                workStatus.Visible = true;
+            };
         }
-        private delegate void dFillLabels(Stopwatch watch);
-        
-        private void fill_labels(Stopwatch watch)
-        {
-            processTimeLabel.Text = String.Format("License Plate Recognition time: {0} milli-seconds", watch.Elapsed.TotalMilliseconds);
-        }
+
 
         private delegate void _ClearPanel();
         private void clearPanel()
         {
             panel1.Controls.Clear();
         }
-
-      private void ProcessImage(IInputOutputArray image)
+        private void ProcessImage(IInputOutputArray image)
       {
          Stopwatch watch = Stopwatch.StartNew(); // time the detection process
 
          List<IInputOutputArray> licensePlateImagesList = new List<IInputOutputArray>();
          List<IInputOutputArray> filteredLicensePlateImagesList = new List<IInputOutputArray>();
          List<RotatedRect> licenseBoxList = new List<RotatedRect>();
-         List<string> words = _licensePlateDetector.DetectLicensePlate(
+         List<string> words = _recognator.DetectLicensePlate(
             image,
             licensePlateImagesList,
             filteredLicensePlateImagesList,
@@ -56,133 +70,128 @@ namespace Recognator
 
          watch.Stop(); //stop the timer
 
-            processTimeLabel.Invoke(new dFillLabels(fill_labels), watch);
 
-            this.Controls.Owner.Invoke(_clearPanel);
          Point startPoint = new Point(10, 10);
-         for (int i = 0; i < words.Count; i++)
-         {
-            Mat dest = new Mat();
-            CvInvoke.VConcat(licensePlateImagesList[i], filteredLicensePlateImagesList[i], dest);
-
-
-
-                this.Controls.Owner.Invoke(_addLabelAndImage,  startPoint,
-               String.Format("License: {0}", words[i]),
-               dest);
-               // _addLabelAndImage.Invoke(ref startPoint,
-               //String.Format("License: {0}", words[i]),
-               //dest);
-
-
-
-            //AddLabelAndImage(
-            //   ref startPoint,
-            //   String.Format("License: {0}", words[i]),
-            //   dest);
-            PointF[] verticesF = licenseBoxList[i].GetVertices();
-            Point[] vertices = Array.ConvertAll(verticesF, Point.Round);
-            using(VectorOfPoint pts = new VectorOfPoint(vertices))
-               CvInvoke.Polylines(image, pts, true, new Bgr(Color.Red).MCvScalar,2  );
-            
-         }
-            Thread.Sleep(5000);
-
-      }
-
-
-        private delegate void _AddLabelAndImage(ref Point startPoint, String labelText, IImage image);
-
-
-      private void AddLabelAndImage(ref Point startPoint, String labelText, IImage image)
-      {
-         Label label = new Label();
-         panel1.Controls.Add(label);
-         label.Text = labelText;
-         label.Width = 100;
-         label.Height = 30;
-         label.Location = startPoint;
-         startPoint.Y += label.Height;
-
-         ImageBox box = new ImageBox();
-         panel1.Controls.Add(box);
-         box.ClientSize = image.Size;
-         box.Image = image;
-         box.Location = startPoint;
-         startPoint.Y += box.Height + 10;
-      }
-
-      private void button1_Click(object sender, EventArgs e)
-      {
-         DialogResult result = openFileDialog1.ShowDialog();
-         if (result == DialogResult.OK)
-         {
-            try
+            if (words.Count != 0)
             {
-                    //img = CvInvoke.Imread(openFileDialog1.FileName, LoadImageType.Grayscale);
-                    //Image img = new Image(openFileDialog1.FileName);
-                    string path = openFileDialog1.FileName;
-                    capture = new Capture(path);
-               m = capture.QueryFrame();
-               //UMat um = m.ToUMat(AccessType.ReadWrite);
-               pictureBox1.Image = m.Bitmap;
-               //ProcessImage(m);
+                for (int i = 0; i < words.Count; i++)
+                {
+                    Mat dest = new Mat();
+                    CvInvoke.VConcat(licensePlateImagesList[i], filteredLicensePlateImagesList[i], dest);
+
+                    this.Controls.Owner.Invoke(_addLabelAndImage,
+                                                      startPoint,
+                                  String.Format("{0}", words[i]),
+                                                     dest, watch);
+
+                    PointF[] verticesF = licenseBoxList[i].GetVertices();
+                    Point[] vertices = Array.ConvertAll(verticesF, Point.Round);
+                    using (VectorOfPoint pts = new VectorOfPoint(vertices))
+                        CvInvoke.Polylines(image, pts, true, new Bgr(Color.Yellow).MCvScalar, 2);
 
                 }
-            catch
-            {
-               MessageBox.Show(String.Format("Invalide File: {0}", openFileDialog1.FileName.Replace("\\","/")));
-               return;
+                Thread.Sleep(3000);
             }
 
-            //UMat uImg = img.ToUMat(AccessType.ReadWrite);
-            ProcessImage(m);
-         }
       }
+        private delegate void _AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch);
+        private void AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch)
+      {
+            Label label = new Label();
 
-        private void button2_Click(object sender, EventArgs e)
+            string str = regex.Match(labelText).ToString();
+            plateMain_textBox.Text = regex.Match(labelText).ToString();
+            plateRegion_textBox.Text = regex2.Match(labelText).ToString();
+
+
+            startPoint.Y += plateNumber.Height + 100;
+
+            ImageBox box = new ImageBox();
+            panel1.Controls.Add(box);
+            box.ClientSize = image.Size;
+            box.Image = image;
+            box.Location = startPoint;
+            startPoint.Y += box.Height + 10;
+            //logBox.Text += "\n" + DateTime.Now + ": " + watch.ElapsedMilliseconds + "мс: [" + plateMain_textBox.Text + "|" + plateRegion_textBox.Text + "]";
+
+      }  
+        
+        
+        private void getFrame(object sender, EventArgs arg)
         {
-            isStarted = !isStarted;
-            if (isStarted)
+            try
             {
-                button2.Text = "STOP";
+                if (capture.QueryFrame() != null)
+                {
+                    m = capture.QueryFrame();
+                    displayImage(m.Bitmap);
+                    if (!detectWorker.IsBusy)
+                    {
+                        if (!detectWorker.CancellationPending)
+                        {
+                            detectWorker.RunWorkerAsync();
+                        }
+                    }
+                }
+
+                else displayImage(Properties.Resources.test);
+            }
+            catch (NullReferenceException)
+            {
+                Application.Idle -= getFrame;
+                capture.Stop();
+            }
+        }
+
+
+        private delegate void _displayImage(Bitmap image);
+        private void displayImage(Bitmap image)
+        {
+
+            if (pictureBox1.InvokeRequired)
+            {
                 try
                 {
-                    if(capture == null) capture = new Capture("http://sedgusev:170396@192.168.0.3:8080/video");
+                    _displayImage DI = new _displayImage(displayImage);
+                    this.BeginInvoke(DI, new object[] { image });
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                 }
-                Application.Idle += initBrains;
             }
             else
             {
-                Application.Idle -= initBrains;
-                capture.Stop();
-                button2.Text = "START";
+                pictureBox1.Image = image;
             }
-
         }
 
-        Thread detect;
-        private void initBrains(object sender, EventArgs arg)
+
+
+
+
+        #region Worker
+        private void startDetect()
         {
-            m = capture.QueryFrame();
-            pictureBox1.Image = m.Bitmap;
-            if (detect == null)
-            {
-                detect = new Thread(() => ProcessImage(m));
-                detect.Start();
-            }
-
-            if (!detect.IsAlive)
-            {
-                detect = new Thread(() => ProcessImage(m));
-                detect.Start();
-            }
-
-
+            ProcessImage(m);
         }
+        private void processWorker(object sender, DoWorkEventArgs e)
+        {
+            detectWorker.ReportProgress(1);
+            startDetect();
+        }
+
+        private void completeWorker(object sender, RunWorkerCompletedEventArgs e)
+        {
+            workStatus.Visible = false;
+        }
+        #endregion
+
+        private void formLoad(object sender, EventArgs e)
+        {
+            Application.Idle += getFrame;
+        }
+
+        
     }
 
 }

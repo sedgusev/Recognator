@@ -16,7 +16,7 @@ namespace Recognator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RecognatorForm());
+            Application.Run(new LoadForm());
         }
     }
 }

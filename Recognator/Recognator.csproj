@@ -9,14 +9,30 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Recognator</RootNamespace>
     <AssemblyName>Recognator</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -34,41 +50,82 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>camera.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CircularProgressBar, Version=2.5.6298.4486, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.5.6298.4486\lib\net35-client\CircularProgressBar.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.UI, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.UI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Emgu.CV.UI.GL, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.UI.GL.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Emgu.CV.World, Version=3.1.0.2282, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\EmguCV.3.1.0.1\lib\net30\Emgu.CV.World.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.2.0.0\lib\net20\OpenTK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="OpenTK.GLControl, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.GLControl.1.1.2349.61993\lib\NET40\OpenTK.GLControl.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.WinControls, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
-    <Reference Include="Telerik.WinControls.Themes.Material, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
-    <Reference Include="Telerik.WinControls.Themes.Windows7, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Telerik.WinControls, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Material, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Office2013Dark, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.Themes.Windows7, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2017.2.502.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WinFormAnimation, Version=1.5.6298.3372, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.5.6298.3372\lib\net35-client\WinFormAnimation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaptureHolder.cs" />
+    <Compile Include="LoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadForm.Designer.cs">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecognatorBrains.cs" />
     <Compile Include="RecognatorForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +135,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="LoadForm.resx">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RecognatorForm.resx">
       <DependentUpon>RecognatorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +150,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="OpenTK.dll.config" />
     <None Include="packages.config" />
@@ -107,19 +168,43 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FodyWeavers.xml" />
+    <Content Include="camera.ico" />
     <Content Include="camera.png" />
+    <Content Include="readme.txt" />
+    <None Include="Resources\960.jpg" />
+    <EmbeddedResource Include="Resources\cvextern.dll" />
+    <EmbeddedResource Include="Resources\opencv_ffmpeg310.dll" />
+    <EmbeddedResource Include="Resources\plate.png" />
+    <None Include="FodyWeavers.xml" />
     <Content Include="License-LGPL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.2.0.9\build\netstandard1.4\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.9\build\netstandard1.4\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets'))" />
     <Error Condition="!Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EmguCV.3.1.0.1\build\EmguCV.props'))" />
     <Error Condition="!Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EmguCV.3.1.0.1\build\EmguCV.targets'))" />
-    <Error Condition="!Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.2.0.6\build\dotnet\Fody.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\Fody.2.0.9\build\netstandard1.4\Fody.targets" Condition="Exists('..\packages\Fody.2.0.9\build\netstandard1.4\Fody.targets')" />
+  <Import Project="..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.1.5.0\build\dotnet\Costura.Fody.targets')" />
   <Import Project="..\packages\EmguCV.3.1.0.1\build\EmguCV.targets" Condition="Exists('..\packages\EmguCV.3.1.0.1\build\EmguCV.targets')" />
-  <Import Project="..\packages\Fody.2.0.6\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.2.0.6\build\dotnet\Fody.targets')" />
 </Project>
