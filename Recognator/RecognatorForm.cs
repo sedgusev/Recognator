@@ -77,6 +77,7 @@ namespace Recognator
          Point startPoint = new Point(10, 10);
             if (words.Count != 0)
             {
+                this.Controls.Owner.Invoke(new _ClearPanel(clearPanel));
                 for (int i = 0; i < words.Count; i++)
                 {
                     Mat dest = new Mat();
@@ -100,22 +101,24 @@ namespace Recognator
         private delegate void _AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch);
         private void AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch)
       {
-            Label label = new Label();
             labelText = labelText.Replace(" ", "");
             string str = regex.Match(labelText).ToString();
-            plateMain_textBox.Text = regex.Match(labelText).ToString();
             string str2 = Regex.Replace(labelText, str, String.Empty);
-            plateRegion_textBox.Text = regex2.Match(str2).ToString();
+            string str3 = regex2.Match(str2).ToString();
 
+            if (str != String.Empty && str3 != String.Empty)
+            {
+                plateMain_textBox.Text = str;
+                plateRegion_textBox.Text = str3;
 
-            startPoint.Y += plateNumber.Height + 100;
-
-            ImageBox box = new ImageBox();
-            panel1.Controls.Add(box);
-            box.ClientSize = image.Size;
-            box.Image = image;
-            box.Location = startPoint;
-            startPoint.Y += box.Height + 10;
+                PictureBox box = new PictureBox();
+                panel1.Controls.Add(box);
+                box.ClientSize = image.Size;
+                box.Image = image.Bitmap;
+                box.Location = startPoint;
+                startPoint.Y += box.Height;
+                panel1.Visible = true;
+            }
             //logBox.Text += "\n" + DateTime.Now + ": " + watch.ElapsedMilliseconds + "ìñ: [" + plateMain_textBox.Text + "|" + plateRegion_textBox.Text + "]";
 
       }  
@@ -182,29 +185,34 @@ namespace Recognator
             workStatus.Visible = false;
         }
 
+        private void closingForm(object sender, FormClosingEventArgs e)
+        {
+            Application.Idle -= getFrame;
+        }
+
 
 
         #endregion
 
-        private void stop_button_Click(object sender, EventArgs e)
-        {
-            if (stop_button.Text == "ÑÒÀÐÒ")
-            {
-                if (!detectWorker.IsBusy)
-                {
-                    stop_button.Text = "ÑÒÎÏ";
-                    detectWorker.RunWorkerAsync();
-                }
-            }
-            if (stop_button.Text == "ÑÒÎÏ")
-            {
-                if (!detectWorker.CancellationPending)
-                {
-                    detectWorker.CancelAsync();
-                    stop_button.Text = "ÑÒÀÐÒ";
-                }
-            }
-        }
+        //private void stop_button_Click(object sender, EventArgs e)
+        //{
+        //    if (stop_button.Text == "ÑÒÀÐÒ")
+        //    {
+        //        if (!detectWorker.IsBusy)
+        //        {
+        //            stop_button.Text = "ÑÒÎÏ";
+        //            detectWorker.RunWorkerAsync();
+        //        }
+        //    }
+        //    if (stop_button.Text == "ÑÒÎÏ")
+        //    {
+        //        if (!detectWorker.CancellationPending)
+        //        {
+        //            detectWorker.CancelAsync();
+        //            stop_button.Text = "ÑÒÀÐÒ";
+        //        }
+        //    }
+        //}
     }
 
 }

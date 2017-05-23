@@ -20,7 +20,7 @@ namespace Recognator
         {
 
             //_ocr = new Emgu.CV.OCR.Tesseract("C:/Users/sedgu/Documents/emgucv-windesktop 3.2.0.2682/Emgu.CV.Example/LicensePlateRecognition/obj/Debug/tessdata", "eng", OcrEngineMode.TesseractOnly);
-            InitOcr("C:/Users/sedgu/Documents/emgucv-windesktop 3.2.0.2682/Emgu.CV.Example/LicensePlateRecognition/obj/Debug/", "eng", OcrEngineMode.TesseractOnly);
+            InitOcr(Directory.GetCurrentDirectory()+"\\", "eng", OcrEngineMode.TesseractOnly);
             _ocr.SetVariable("tessedit_char_whitelist", "ABEKMHOPCTXY-1234567890");
         }
 

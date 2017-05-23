@@ -32,19 +32,25 @@ namespace Recognator
             this.radDropDownButton1 = new Telerik.WinControls.UI.RadDropDownButton();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem2 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuItem4 = new Telerik.WinControls.UI.RadMenuItem();
             this.materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
             this.progressBar1 = new CircularProgressBar.CircularProgressBar();
             this.captureLoadWorker = new System.ComponentModel.BackgroundWorker();
             this.error_label = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.radDropDownButton1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // radDropDownButton1
             // 
             this.radDropDownButton1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1,
-            this.radMenuItem2});
-            this.radDropDownButton1.Location = new System.Drawing.Point(144, 88);
+            this.radMenuItem2,
+            this.radMenuItem4});
+            this.radDropDownButton1.Location = new System.Drawing.Point(134, 92);
             this.radDropDownButton1.Name = "radDropDownButton1";
             this.radDropDownButton1.Size = new System.Drawing.Size(175, 40);
             this.radDropDownButton1.TabIndex = 1;
@@ -63,6 +69,12 @@ namespace Recognator
             this.radMenuItem2.Text = "Демо";
             this.radMenuItem2.Click += new System.EventHandler(this.radMenuItem2_Click);
             // 
+            // radMenuItem4
+            // 
+            this.radMenuItem4.Name = "radMenuItem4";
+            this.radMenuItem4.Text = "Настройки";
+            this.radMenuItem4.Click += new System.EventHandler(this.radMenuItem4_Click);
+            // 
             // progressBar1
             // 
             this.progressBar1.AnimationFunction = WinFormAnimation.KnownAnimationFunctions.CircularEaseInOut;
@@ -73,7 +85,7 @@ namespace Recognator
             this.progressBar1.InnerColor = System.Drawing.Color.WhiteSmoke;
             this.progressBar1.InnerMargin = 2;
             this.progressBar1.InnerWidth = -1;
-            this.progressBar1.Location = new System.Drawing.Point(208, 88);
+            this.progressBar1.Location = new System.Drawing.Point(202, 73);
             this.progressBar1.MarqueeAnimationSpeed = 2000;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.OuterColor = System.Drawing.Color.Maroon;
@@ -109,12 +121,31 @@ namespace Recognator
             this.error_label.AutoSize = true;
             this.error_label.Font = new System.Drawing.Font("MS Reference Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.error_label.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.error_label.Location = new System.Drawing.Point(144, 69);
+            this.error_label.Location = new System.Drawing.Point(134, 73);
             this.error_label.Name = "error_label";
             this.error_label.Size = new System.Drawing.Size(175, 16);
             this.error_label.TabIndex = 14;
             this.error_label.Text = "Ошибка подключения";
             this.error_label.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.error_label);
+            this.panel1.Controls.Add(this.radDropDownButton1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(457, 211);
+            this.panel1.TabIndex = 15;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.progressBar1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(457, 211);
+            this.panel2.TabIndex = 16;
             // 
             // LoadForm
             // 
@@ -123,17 +154,19 @@ namespace Recognator
             this.BackColor = System.Drawing.Color.Maroon;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(457, 211);
-            this.Controls.Add(this.error_label);
-            this.Controls.Add(this.radDropDownButton1);
-            this.Controls.Add(this.progressBar1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoadForm";
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoadForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closingForm);
+            this.Load += new System.EventHandler(this.formLoad);
             ((System.ComponentModel.ISupportInitialize)(this.radDropDownButton1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -145,5 +178,8 @@ namespace Recognator
         private CircularProgressBar.CircularProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker captureLoadWorker;
         private System.Windows.Forms.Label error_label;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem4;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }
