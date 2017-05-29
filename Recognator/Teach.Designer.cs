@@ -203,7 +203,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Teach";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Teach";
+            this.Text = "Обучение";
             this.Load += new System.EventHandler(this.formLoad);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

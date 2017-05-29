@@ -106,7 +106,7 @@ namespace Recognator
             string str2 = Regex.Replace(labelText, str, String.Empty);
             string str3 = regex2.Match(str2).ToString();
 
-            if (str != String.Empty && str3 != String.Empty)
+            if (str != String.Empty)
             {
                 plateMain_textBox.Text = str;
                 plateRegion_textBox.Text = str3;
@@ -121,7 +121,7 @@ namespace Recognator
             }
             //logBox.Text += "\n" + DateTime.Now + ": " + watch.ElapsedMilliseconds + "мс: [" + plateMain_textBox.Text + "|" + plateRegion_textBox.Text + "]";
 
-      }  
+        }  
         
         
         private void getFrame(object sender, EventArgs arg)

@@ -32,13 +32,15 @@ namespace Recognator
             this.radDropDownButton1 = new Telerik.WinControls.UI.RadDropDownButton();
             this.radMenuItem1 = new Telerik.WinControls.UI.RadMenuItem();
             this.radMenuItem2 = new Telerik.WinControls.UI.RadMenuItem();
-            this.radMenuItem4 = new Telerik.WinControls.UI.RadMenuItem();
+            this.radMenuItem5 = new Telerik.WinControls.UI.RadMenuItem();
             this.materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
             this.progressBar1 = new CircularProgressBar.CircularProgressBar();
             this.captureLoadWorker = new System.ComponentModel.BackgroundWorker();
             this.error_label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.radMenuSeparatorItem1 = new Telerik.WinControls.UI.RadMenuSeparatorItem();
+            this.radMenuItem4 = new Telerik.WinControls.UI.RadMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.radDropDownButton1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -49,6 +51,8 @@ namespace Recognator
             this.radDropDownButton1.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.radMenuItem1,
             this.radMenuItem2,
+            this.radMenuItem5,
+            this.radMenuSeparatorItem1,
             this.radMenuItem4});
             this.radDropDownButton1.Location = new System.Drawing.Point(134, 92);
             this.radDropDownButton1.Name = "radDropDownButton1";
@@ -69,11 +73,11 @@ namespace Recognator
             this.radMenuItem2.Text = "Демо";
             this.radMenuItem2.Click += new System.EventHandler(this.radMenuItem2_Click);
             // 
-            // radMenuItem4
+            // radMenuItem5
             // 
-            this.radMenuItem4.Name = "radMenuItem4";
-            this.radMenuItem4.Text = "Настройки";
-            this.radMenuItem4.Click += new System.EventHandler(this.radMenuItem4_Click);
+            this.radMenuItem5.Name = "radMenuItem5";
+            this.radMenuItem5.Text = "База номеров";
+            this.radMenuItem5.Click += new System.EventHandler(this.radMenuItem5_Click);
             // 
             // progressBar1
             // 
@@ -107,7 +111,6 @@ namespace Recognator
             this.progressBar1.TabIndex = 13;
             this.progressBar1.TextMargin = new System.Windows.Forms.Padding(0);
             this.progressBar1.Value = 68;
-            this.progressBar1.Visible = false;
             // 
             // captureLoadWorker
             // 
@@ -147,6 +150,18 @@ namespace Recognator
             this.panel2.Size = new System.Drawing.Size(457, 211);
             this.panel2.TabIndex = 16;
             // 
+            // radMenuSeparatorItem1
+            // 
+            this.radMenuSeparatorItem1.Name = "radMenuSeparatorItem1";
+            this.radMenuSeparatorItem1.Text = "radMenuSeparatorItem1";
+            this.radMenuSeparatorItem1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // radMenuItem4
+            // 
+            this.radMenuItem4.Name = "radMenuItem4";
+            this.radMenuItem4.Text = "Настройки";
+            this.radMenuItem4.Click += new System.EventHandler(this.radMenuItem4_Click);
+            // 
             // LoadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,7 +174,6 @@ namespace Recognator
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "LoadForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closingForm);
             this.Load += new System.EventHandler(this.formLoad);
             ((System.ComponentModel.ISupportInitialize)(this.radDropDownButton1)).EndInit();
@@ -178,8 +192,10 @@ namespace Recognator
         private CircularProgressBar.CircularProgressBar progressBar1;
         private System.ComponentModel.BackgroundWorker captureLoadWorker;
         private System.Windows.Forms.Label error_label;
-        private Telerik.WinControls.UI.RadMenuItem radMenuItem4;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private Telerik.WinControls.UI.RadMenuSeparatorItem radMenuSeparatorItem1;
+        private Telerik.WinControls.UI.RadMenuItem radMenuItem4;
     }
 }

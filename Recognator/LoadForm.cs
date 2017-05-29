@@ -40,7 +40,6 @@ namespace Recognator
             Settings settings = new Settings(this);
             settings.ShowDialog();
             flag = true;
-            panel1.Visible = false;
             runProcess();
         }
 
@@ -58,14 +57,13 @@ namespace Recognator
 
         private void runProcess()
         {
-            error_label.Visible = false;
-            radDropDownButton1.Visible = false;
-            progressBar1.Visible = true;
+            panel1.Visible = false;
+            panel2.Visible = true;
             captureLoadWorker.ProgressChanged += (a, b) =>
             {
                 error_label.Visible = true;
-                radDropDownButton1.Visible = true;
-                progressBar1.Visible = false;
+                panel1.Visible = true;
+                panel2.Visible = false;
             };
             if (!captureLoadWorker.CancellationPending)
             {
@@ -83,7 +81,9 @@ namespace Recognator
                 rf = new RecognatorForm(capture);
                 rf.FormClosed += (a, b) =>
                 {
-                    this.Close();
+                    this.panel1.Visible = true;
+                    this.Visible = true;
+                    this.Refresh();
                 };
             }
             else
@@ -97,6 +97,7 @@ namespace Recognator
             if (rf != null)
             {
                 this.Visible = false;
+                panel1.Visible = true;
                 rf.Show();
             }
         }
@@ -125,6 +126,9 @@ namespace Recognator
         {
         }
 
-        
+        private void radMenuItem5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

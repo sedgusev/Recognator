@@ -61,6 +61,26 @@ namespace Recognator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] cvextern {
+            get {
+                object obj = ResourceManager.GetObject("cvextern", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] opencv_ffmpeg310 {
+            get {
+                object obj = ResourceManager.GetObject("opencv_ffmpeg310", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap plate {

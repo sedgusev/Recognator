@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
+            this.radButton2 = new Telerik.WinControls.UI.RadButton();
             this.radButton1 = new Telerik.WinControls.UI.RadButton();
             this.radTextBox1 = new Telerik.WinControls.UI.RadTextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.radButton2 = new Telerik.WinControls.UI.RadButton();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -49,6 +49,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(395, 204);
             this.panel3.TabIndex = 16;
+            // 
+            // radButton2
+            // 
+            this.radButton2.Location = new System.Drawing.Point(277, 156);
+            this.radButton2.Name = "radButton2";
+            this.radButton2.Size = new System.Drawing.Size(106, 36);
+            this.radButton2.TabIndex = 2;
+            this.radButton2.Text = "Отмена";
+            this.radButton2.ThemeName = "Material";
+            this.radButton2.Click += new System.EventHandler(this.radButton2_Click);
             // 
             // radButton1
             // 
@@ -72,16 +82,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // radButton2
-            // 
-            this.radButton2.Location = new System.Drawing.Point(277, 156);
-            this.radButton2.Name = "radButton2";
-            this.radButton2.Size = new System.Drawing.Size(106, 36);
-            this.radButton2.TabIndex = 2;
-            this.radButton2.Text = "Отмена";
-            this.radButton2.ThemeName = "Material";
-            this.radButton2.Click += new System.EventHandler(this.radButton2_Click);
-            // 
             // LoadFIle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,12 +92,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoadFIle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LoadFIle";
+            this.Text = "Демо";
+            this.Load += new System.EventHandler(this.loadForm);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radTextBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radButton2)).EndInit();
             this.ResumeLayout(false);
 
         }
