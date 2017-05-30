@@ -41,6 +41,8 @@
             this.detectWorker = new System.ComponentModel.BackgroundWorker();
             this.materialTheme1 = new Telerik.WinControls.Themes.MaterialTheme();
             this.imageBox1 = new Emgu.CV.UI.ImageBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +62,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.workStatus);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             this.splitContainer1.Panel1.Controls.Add(this.panel3);
@@ -197,6 +201,28 @@
             this.imageBox1.TabIndex = 4;
             this.imageBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(27, 457);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Allow";
+            this.label1.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(66, 457);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "disallow";
+            this.label2.Visible = false;
+            // 
             // RecognatorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,6 +236,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.closingForm);
             this.Load += new System.EventHandler(this.formLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -237,5 +264,7 @@
         private System.ComponentModel.BackgroundWorker detectWorker;
         private CircularProgressBar.CircularProgressBar workStatus;
         private Telerik.WinControls.Themes.MaterialTheme materialTheme1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

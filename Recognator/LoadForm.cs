@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Recognator
         public string IP = "192.168.0.2";
         public string PORT = "8080";
 
+        SqlConnection connection;
         public LoadForm()
         {
             InitializeComponent();
@@ -78,7 +80,7 @@ namespace Recognator
             if (!flag) capture = new Capture(filePath);
             if (capture.QueryFrame() != null)
             {
-                rf = new RecognatorForm(capture);
+                rf = new RecognatorForm(capture, connection);
                 rf.FormClosed += (a, b) =>
                 {
                     this.panel1.Visible = true;
@@ -120,10 +122,36 @@ namespace Recognator
             {
                 capture.Dispose();
             }
+            connection.Close();
         }
 
         private void formLoad(object sender, EventArgs e)
         {
+
+
+            try
+            {
+                connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+                connection.Open();
+
+                SqlDataReader reader;
+                SqlCommand command = new SqlCommand("select * from Person",connection);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    MessageBox.Show(reader[2].ToString());
+                }
+                
+            }
+            catch (SqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Unknown error");
+            }
         }
 
         private void radMenuItem5_Click(object sender, EventArgs e)

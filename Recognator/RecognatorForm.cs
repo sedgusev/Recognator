@@ -10,6 +10,7 @@ using Emgu.CV.Util;
 using System.Threading;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
+using System.Data.SqlClient;
 
 namespace Recognator
 {
@@ -25,10 +26,14 @@ namespace Recognator
         string pattern = @"[A-Z][0-9][0-9][0-9][A-Z][A-Z]";
         string pattern2 = @"[0-9]{2,3}";
         Thread detect;
+        //Sql
+        SqlConnection connection;
+        SqlDataReader reader;
 
-        public RecognatorForm(Emgu.CV.Capture capture)
+        public RecognatorForm(Emgu.CV.Capture capture, SqlConnection connection)
         {
             this.capture = capture;
+            this.connection = connection;
             InitializeComponent();
             initialLocals();
 
@@ -51,6 +56,20 @@ namespace Recognator
         private void formLoad(object sender, EventArgs e)
         {
             Application.Idle += getFrame;
+            try
+            {
+                SqlCommand query = new SqlCommand("select number from License", connection);
+                reader = query.ExecuteReader();
+            }
+            catch (SqlException sql)
+            {
+
+                MessageBox.Show(sql.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unknown error");
+            }
         }
 
         private delegate void _ClearPanel();
@@ -118,7 +137,22 @@ namespace Recognator
                 box.Location = startPoint;
                 startPoint.Y += box.Height;
                 panel1.Visible = true;
+
+                while (reader.Read())
+                {
+                    if (reader[0].ToString().Equals(str + str3))
+                    {
+                        label1.Visible = true;
+                        label2.Visible = false;
+                    }
+                    else
+                    {
+                        label2.Visible = true;
+                        label1.Visible = false;
+                    }
+                }
             }
+
             //logBox.Text += "\n" + DateTime.Now + ": " + watch.ElapsedMilliseconds + "мс: [" + plateMain_textBox.Text + "|" + plateRegion_textBox.Text + "]";
 
         }  
