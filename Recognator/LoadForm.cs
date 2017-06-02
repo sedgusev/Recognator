@@ -39,10 +39,10 @@ namespace Recognator
         #region ListBox_ItemsCLick
         private void radMenuItem1_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings(this);
+            Settings settings = new Settings();
             settings.ShowDialog();
-            flag = true;
-            runProcess();
+            //flag = true;
+            //runProcess();
         }
 
         private void radMenuItem2_Click(object sender, EventArgs e)
@@ -106,7 +106,7 @@ namespace Recognator
 
         private void radMenuItem3_Click(object sender, EventArgs e)
         {
-            Settings settings = new Settings(this);
+            Settings settings = new Settings();
             settings.ShowDialog();
         }
 
@@ -131,17 +131,9 @@ namespace Recognator
 
             try
             {
-                connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=identitydb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
                 connection.Open();
-
-                SqlDataReader reader;
-                SqlCommand command = new SqlCommand("select * from Person",connection);
-                reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    MessageBox.Show(reader[2].ToString());
-                }
                 
             }
             catch (SqlException exc)

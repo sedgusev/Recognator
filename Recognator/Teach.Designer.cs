@@ -115,7 +115,7 @@
             this.radLabel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.radLabel1.Location = new System.Drawing.Point(82, 90);
             this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(143, 21);
+            this.radLabel1.Size = new System.Drawing.Size(109, 18);
             this.radLabel1.TabIndex = 7;
             this.radLabel1.Text = "Функция активации";
             this.radLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -135,7 +135,7 @@
             this.sinRadBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.sinRadBtn.Location = new System.Drawing.Point(3, 3);
             this.sinRadBtn.Name = "sinRadBtn";
-            this.sinRadBtn.Size = new System.Drawing.Size(140, 22);
+            this.sinRadBtn.Size = new System.Drawing.Size(104, 16);
             this.sinRadBtn.TabIndex = 4;
             this.sinRadBtn.Text = "Синусоидальная";
             this.sinRadBtn.ThemeName = "Material";
@@ -144,9 +144,9 @@
             // tanRadBtn
             // 
             this.tanRadBtn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.tanRadBtn.Location = new System.Drawing.Point(3, 31);
+            this.tanRadBtn.Location = new System.Drawing.Point(3, 25);
             this.tanRadBtn.Name = "tanRadBtn";
-            this.tanRadBtn.Size = new System.Drawing.Size(138, 22);
+            this.tanRadBtn.Size = new System.Drawing.Size(102, 16);
             this.tanRadBtn.TabIndex = 5;
             this.tanRadBtn.Text = "Тангенциальная";
             this.tanRadBtn.ThemeName = "Material";
@@ -157,7 +157,7 @@
             // 
             this.radTextBox1.Location = new System.Drawing.Point(85, 34);
             this.radTextBox1.Name = "radTextBox1";
-            this.radTextBox1.Size = new System.Drawing.Size(202, 36);
+            this.radTextBox1.Size = new System.Drawing.Size(202, 20);
             this.radTextBox1.TabIndex = 0;
             this.radTextBox1.ThemeName = "Material";
             // 
