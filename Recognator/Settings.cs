@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,9 +16,28 @@ namespace Recognator
 {
     public partial class Settings : Form
     {
-        Capture capture;
-        private bool flag;
+        //screens
+        public LoginPanel lp;
+        public CameraPanel cp;
+        public DemoPanel dp;
+        public TeachPanel tp;
+        public TeachingPanel tgp;
+        public RecognatorPanel rp;
+
+        //global objects
+        public Emgu.CV.Capture capture;
+        public bool flag;
         public string filePath;
+        public SqlConnection connection;
+        public RecognatorBrains _recognator;
+        public Mat m;
+        public Regex regex;
+        public Regex regex2;
+        public string pattern = @"[A-Z][0-9][0-9][0-9][A-Z][A-Z]";
+        public string pattern2 = @"[0-9]{2,3}";
+        public SqlDataReader reader;
+        public string PAthToVideo;
+
 
         //user settings default
         private string lv_USER = "sedgusev";
@@ -25,12 +45,17 @@ namespace Recognator
         private string lv_IP = "192.168.0.2";
         private string lv_PORT = "8080";
 
-        SqlConnection connection;
-
 
         public Settings()
         {
             InitializeComponent();
+            initialLocals();
+        }
+
+        private void initialLocals()
+        {
+            regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            regex2 = new Regex(pattern2, RegexOptions.IgnoreCase);
         }
 
         #region sidepanel
@@ -40,7 +65,7 @@ namespace Recognator
             if(sidepanel.Width == 50)
             {
                 sidepanel.Visible = false;
-                sidepanel.Width = 412;
+                sidepanel.Width = 212;
                 animator1.ShowSync(sidepanel);
             }
             else
@@ -53,38 +78,26 @@ namespace Recognator
 
         private void homeBtn_Click(object sender, EventArgs e)
         {
-            flag = true;
-            SwitchAnimator.Hide(camera_panel);
-            SwitchAnimator.Hide(teach_panel);
-            SwitchAnimator.Hide(teach_process_panel);
-            SwitchAnimator.Hide(demo_panel);
-            SwitchAnimator.ShowSync(main_panel);
+            container.Controls.Clear();
+            container.Controls.Add(lp);
+
+
         }
 
         private void cameraBtn_Click(object sender, EventArgs e)
         {
-            flag = false;
-            SwitchAnimator.Hide(teach_panel);
-            SwitchAnimator.Hide(teach_process_panel);
-            SwitchAnimator.Hide(demo_panel);
-            SwitchAnimator.Hide(main_panel);
-            SwitchAnimator.ShowSync(camera_panel);
+            container.Controls.Clear();
+            container.Controls.Add(cp);
         }
         private void demoBtn_Click(object sender, EventArgs e)
         {
-            SwitchAnimator.Hide(teach_panel);
-            SwitchAnimator.Hide(teach_process_panel);
-            SwitchAnimator.Hide(main_panel);
-            SwitchAnimator.Hide(camera_panel);
-            SwitchAnimator.ShowSync(demo_panel);
+            container.Controls.Clear();
+            container.Controls.Add(dp);
         }
         private void settingsBtn_Click(object sender, EventArgs e)
         {
-            SwitchAnimator.Hide(teach_process_panel);
-            SwitchAnimator.Hide(main_panel);
-            SwitchAnimator.Hide(camera_panel);
-            SwitchAnimator.Hide(demo_panel);
-            SwitchAnimator.Show(teach_panel);
+            container.Controls.Clear();
+            container.Controls.Add(tp);
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
@@ -93,21 +106,21 @@ namespace Recognator
             {
                 this.Close();
             }
-            catch (Exception)
+            catch (Exception close)
             {
+                MessageBox.Show(close.Message);
             }
         }
 
         #endregion
 
-
         #region camera_panel
         private void okBtn_Click(object sender, EventArgs e)
         {
-            lv_USER = this.USER.Text;
-            lv_PASSWORD = this.PASSWORD.Text;
-            lv_IP = this.IP.Text;
-            lv_PORT = this.PORT.Text;
+            //lv_USER = this.USER.Text;
+            //lv_PASSWORD = this.PASSWORD.Text;
+            //lv_IP = this.IP.Text;
+            //lv_PORT = this.PORT.Text;
         }
         #endregion
 
@@ -181,11 +194,10 @@ namespace Recognator
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (capture != null) capture.Dispose();
-            if (flag) capture = new Capture("http://" + USER + ":" + PASSWORD + "@" + IP + ":" + PORT + "/video");
-            if (!flag) capture = new Capture(filePath);
+            if (flag) capture = new Emgu.CV.Capture("http://" + lv_USER + ":" + lv_PASSWORD + "@" + lv_IP + ":" + lv_PORT + "/video");
+            if (!flag) capture = new Emgu.CV.Capture(filePath);
             if (capture.QueryFrame() != null)
             {
-                //rf = new RecognatorForm(capture, connection);
                 //rf.FormClosed += (a, b) =>
                 //{
                 //    this.panel1.Visible = true;
@@ -195,27 +207,55 @@ namespace Recognator
             }
             else
             {
-                backgroundWorker.ReportProgress(5);
+                captureLoadWorker.ReportProgress(5);
             }
         }
 
         private void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            errorPanel.Visible = true;
+            if (flag)
+            {
+                container.Controls.Clear();
+                container.Controls.Add(cp);
+            }
+            if (!flag)
+            {
+                container.Controls.Clear();
+                container.Controls.Add(dp);
+            }
 
         }
 
         private void worker_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (!errorPanel.Visible)
+            {
+                container.Controls.Clear();
+                if (rp == null) rp = new RecognatorPanel(this);
+                container.Controls.Add(rp);
+            }
 
         }
 
         private void formLoad(object sender, EventArgs e)
         {
+            lp = new LoginPanel(this);
+            cp = new CameraPanel(this);
+            dp = new DemoPanel(this);
+            tp = new TeachPanel(this);
+
             try
             {
-                connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                if (dbConnect.Checked)
+                {
+                    connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
-                connection.Open();
+                    connection.Open();
+
+                    SqlCommand query = new SqlCommand("select number from License", connection);
+                    reader = query.ExecuteReader();
+                }
 
             }
             catch (SqlException exc)
@@ -230,5 +270,26 @@ namespace Recognator
 
 
         #endregion
+
+
+        #region Logic
+        public void runProcess()
+        {
+            errorPanel.Visible = false;
+            container.Controls.Clear();
+            container.Controls.Add(new waiting());
+            if (!captureLoadWorker.CancellationPending)
+            {
+                captureLoadWorker.RunWorkerAsync();
+            }
+        }
+
+        #endregion
+
+        private void formCLosing(object sender, FormClosingEventArgs e)
+        {
+            capture.Dispose();
+            connection.Close();
+        }
     }
 }

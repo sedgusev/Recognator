@@ -153,6 +153,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DemoPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DemoPanel.Designer.cs">
+      <DependentUpon>DemoPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ErrorPanel.Designer.cs">
+      <DependentUpon>ErrorPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="LicensesBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +183,18 @@
     <Compile Include="LoadForm.Designer.cs">
       <DependentUpon>LoadForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CameraPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CameraPanel.Designer.cs">
+      <DependentUpon>CameraPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LoginPanel.Designer.cs">
+      <DependentUpon>LoginPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="RecognatorBrains.cs" />
     <Compile Include="RecognatorForm.cs">
       <SubType>Form</SubType>
@@ -180,6 +204,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecognatorPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecognatorPanel.Designer.cs">
+      <DependentUpon>RecognatorPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -192,12 +222,30 @@
     <Compile Include="Teach.Designer.cs">
       <DependentUpon>Teach.cs</DependentUpon>
     </Compile>
-    <Compile Include="WaitingForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="TeachingPanel.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="WaitingForm.Designer.cs">
-      <DependentUpon>WaitingForm.cs</DependentUpon>
+    <Compile Include="TeachingPanel.Designer.cs">
+      <DependentUpon>TeachingPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="TeachPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TeachPanel.Designer.cs">
+      <DependentUpon>TeachPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="waiting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="waiting.Designer.cs">
+      <DependentUpon>waiting.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DemoPanel.resx">
+      <DependentUpon>DemoPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ErrorPanel.resx">
+      <DependentUpon>ErrorPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LicensesBase.resx">
       <DependentUpon>LicensesBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoadForm.resx">
       <DependentUpon>LoadForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CameraPanel.resx">
+      <DependentUpon>CameraPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginPanel.resx">
+      <DependentUpon>LoginPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RecognatorForm.resx">
       <DependentUpon>RecognatorForm.cs</DependentUpon>
@@ -221,14 +275,23 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RecognatorPanel.resx">
+      <DependentUpon>RecognatorPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Teach.resx">
       <DependentUpon>Teach.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WaitingForm.resx">
-      <DependentUpon>WaitingForm.cs</DependentUpon>
+    <EmbeddedResource Include="TeachingPanel.resx">
+      <DependentUpon>TeachingPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TeachPanel.resx">
+      <DependentUpon>TeachPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="waiting.resx">
+      <DependentUpon>waiting.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="bin\Debug\tessdata\eng.traineddata" />
     <None Include="bin\Debug\tessdata\osd.traineddata" />
