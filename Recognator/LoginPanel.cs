@@ -12,12 +12,12 @@ namespace Recognator
 {
     public partial class LoginPanel : UserControl
     {
-        Settings PARRENT;
+        MainForm PARRENT;
         //autorized data
         public string LOGIN = "admin";
         public string PASSWORD = "admin";
 
-        public LoginPanel(Settings parent)
+        public LoginPanel(MainForm parent)
         {
             InitializeComponent();
             PARRENT = parent;
@@ -25,13 +25,6 @@ namespace Recognator
 
         private void main_panel_loginBtn_Click(object sender, EventArgs e)
         {
-            if(main_panel_usernameTb.Text == LOGIN && main_panel_passwordTb.Text == PASSWORD)
-            {
-                PARRENT.demoBtn.Enabled = true;
-                PARRENT.cameraBtn.Enabled = true;
-                PARRENT.settingsBtn.Enabled = true;
-                this.Visible = false;
-            }
         }
     }
 }

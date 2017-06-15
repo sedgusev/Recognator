@@ -12,9 +12,9 @@ namespace Recognator
 {
     public partial class DemoPanel : UserControl
     {
-        Settings PARRENT;
+        MainForm PARRENT;
 
-        public DemoPanel(Settings parrent)
+        public DemoPanel(MainForm parrent)
         {
             InitializeComponent();
             PARRENT = parrent;

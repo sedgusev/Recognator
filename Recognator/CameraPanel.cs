@@ -12,9 +12,9 @@ namespace Recognator
 {
     public partial class CameraPanel : UserControl
     {
-        Settings PARRENT;
+        MainForm PARRENT;
 
-        public CameraPanel(Settings parrent)
+        public CameraPanel(MainForm parrent)
         {
             InitializeComponent();
             PARRENT = parrent;

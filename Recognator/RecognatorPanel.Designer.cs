@@ -176,6 +176,7 @@
             this.Name = "RecognatorPanel";
             this.Size = new System.Drawing.Size(725, 445);
             this.Load += new System.EventHandler(this.panelLoad);
+            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.removed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

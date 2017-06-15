@@ -2,25 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
-using Emgu.CV;
-using Emgu.CV.CvEnum;
-using Emgu.CV.OCR;
-using Emgu.CV.Structure;
-using Emgu.CV.Util;
-using Emgu.Util;
 using System.IO;
 
 namespace Recognator
 {
-    public class RecognatorBrains: DisposableObject
+    public class RecognatorBrains: Emgu.Util.DisposableObject
     {
-        private Emgu.CV.OCR.Tesseract _ocr;
+        //private Emgu.CV.OCR.Tesseract _ocr;
+        private Tesseract.TesseractEngine _ocr;
         
         public RecognatorBrains()
         {
 
             //_ocr = new Emgu.CV.OCR.Tesseract("C:/Users/sedgu/Documents/emgucv-windesktop 3.2.0.2682/Emgu.CV.Example/LicensePlateRecognition/obj/Debug/tessdata", "eng", OcrEngineMode.TesseractOnly);
-            InitOcr(Directory.GetCurrentDirectory()+"\\", "eng", OcrEngineMode.TesseractCubeCombined);
+            InitOcr(Directory.GetCurrentDirectory()+"\\", "eng", Emgu.CV.OCR.OcrEngineMode.Default);
             _ocr.SetVariable("tessedit_char_whitelist", "ABEKMHOPCTXY-1234567890");
         }
 
@@ -49,7 +44,7 @@ namespace Recognator
         }
 
         //инициализируем тесеракт
-        private void InitOcr(String path, String lang, OcrEngineMode mode)
+        private void InitOcr(String path, String lang, Emgu.CV.OCR.OcrEngineMode mode)
         {
             try
             {
@@ -69,7 +64,8 @@ namespace Recognator
                     ? path
                     : String.Format("{0}{1}", path, System.IO.Path.DirectorySeparatorChar);
 
-                _ocr = new Tesseract(pathFinal, lang, OcrEngineMode.TesseractOnly);
+                //_ocr = new Emgu.CV.OCR.Tesseract(pathFinal, lang, mode);
+                _ocr = new Tesseract.TesseractEngine(pathFinal, lang);
             }
             catch (System.Net.WebException e)
             {
@@ -126,22 +122,24 @@ namespace Recognator
         /// <param name="detectedLicensePlateRegionList">A list where the regions of license plate (defined by an MCvBox2D) are stored</param>
         /// <returns>The list of words for each license plate</returns>
         public List<String> DetectLicensePlate(
-                   IInputArray img,
-                   List<IInputOutputArray> licensePlateImagesList,
-                   List<IInputOutputArray> filteredLicensePlateImagesList,
-                   List<RotatedRect> detectedLicensePlateRegionList)
+                   Emgu.CV.IInputArray img,
+                   List<Emgu.CV.IInputOutputArray> licensePlateImagesList,
+                   List<Emgu.CV.IInputOutputArray> filteredLicensePlateImagesList,
+                   List<Emgu.CV.Structure.RotatedRect> detectedLicensePlateRegionList)
         {
             List<String> licenses = new List<String>();
-            
-            
 
-            using (Mat gray = new Mat())
-            using (Mat canny = new Mat())
-            using (VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint())
+
+
+            using (Emgu.CV.Mat gray = new Emgu.CV.Mat())
+            using (Emgu.CV.Mat binary = new Emgu.CV.Mat())
+            using (Emgu.CV.Mat canny = new Emgu.CV.Mat())
+            using (Emgu.CV.Util.VectorOfVectorOfPoint contours = new Emgu.CV.Util.VectorOfVectorOfPoint())
             {
-                CvInvoke.CvtColor(img, gray, ColorConversion.Bgr2Gray);
-                CvInvoke.Canny(gray, canny, 100, 50, 3, false);
-                int[,] hierachy = CvInvoke.FindContourTree(canny, contours, ChainApproxMethod.ChainApproxSimple);
+                Emgu.CV.CvInvoke.CvtColor(img, gray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+                Emgu.CV.CvInvoke.cvSetImageROI(gray,new Rectangle(100,60,400, 200));
+                Emgu.CV.CvInvoke.Canny(gray, canny, 100, 50, 3, false);
+                int[,] hierachy = Emgu.CV.CvInvoke.FindContourTree(canny, contours, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
 
                 FindLicensePlate(contours, hierachy, 0, gray, canny, licensePlateImagesList, filteredLicensePlateImagesList, detectedLicensePlateRegionList, licenses);
             }            
@@ -172,14 +170,14 @@ namespace Recognator
         }
 
         private void FindLicensePlate(
-                       VectorOfVectorOfPoint contours, 
+                       Emgu.CV.Util.VectorOfVectorOfPoint contours, 
                        int[,] hierachy, 
-                       int idx, 
-                       IInputArray gray, 
-                       IInputArray canny,
-                       List<IInputOutputArray> licensePlateImagesList, 
-                       List<IInputOutputArray> filteredLicensePlateImagesList, 
-                       List<RotatedRect> detectedLicensePlateRegionList,
+                       int idx,
+                       Emgu.CV.IInputArray gray,
+                       Emgu.CV.IInputArray canny,
+                       List<Emgu.CV.IInputOutputArray> licensePlateImagesList, 
+                       List<Emgu.CV.IInputOutputArray> filteredLicensePlateImagesList, 
+                       List<Emgu.CV.Structure.RotatedRect> detectedLicensePlateRegionList,
                        List<String> licenses)
         {
             if (hierachy.Length != 0)
@@ -190,9 +188,9 @@ namespace Recognator
                     //if it does not contains any children (charactor), it is not a license plate region
                     if (numberOfChildren == 0) continue;
 
-                    using (VectorOfPoint contour = contours[idx])
+                    using (Emgu.CV.Util.VectorOfPoint contour = contours[idx])
                     {
-                        if (CvInvoke.ContourArea(contour) > 400)
+                        if (Emgu.CV.CvInvoke.ContourArea(contour) > 400)
                         {
                             if (numberOfChildren < 3)
                             {
@@ -203,7 +201,7 @@ namespace Recognator
                                 continue;
                             }
 
-                            RotatedRect box = CvInvoke.MinAreaRect(contour);
+                            Emgu.CV.Structure.RotatedRect box = Emgu.CV.CvInvoke.MinAreaRect(contour);
                             if (box.Angle < -45.0)
                             {
                                 float tmp = box.Size.Width;
@@ -232,8 +230,8 @@ namespace Recognator
                                 continue;
                             }
 
-                            using (UMat tmp1 = new UMat())
-                            using (UMat tmp2 = new UMat())
+                            using (Emgu.CV.UMat tmp1 = new Emgu.CV.UMat())
+                            using (Emgu.CV.UMat tmp2 = new Emgu.CV.UMat())
                             {
                                 PointF[] srcCorners = box.GetVertices();
 
@@ -243,42 +241,48 @@ namespace Recognator
                                 new PointF(box.Size.Width - 1, 0),
                                 new PointF(box.Size.Width - 1, box.Size.Height - 1)};
 
-                                using (Mat rot = CvInvoke.GetAffineTransform(srcCorners, destCorners))
+                                using (Emgu.CV.Mat rot = Emgu.CV.CvInvoke.GetAffineTransform(srcCorners, destCorners))
                                 {
-                                    CvInvoke.WarpAffine(gray, tmp1, rot, Size.Round(box.Size));
+                                    Emgu.CV.CvInvoke.WarpAffine(gray, tmp1, rot, Size.Round(box.Size));
                                 }
 
                                 //resize the license plate such that the front is ~ 10-12. This size of front results in better accuracy from tesseract
                                 Size approxSize = new Size(240, 180);
                                 double scale = Math.Min(approxSize.Width / box.Size.Width, approxSize.Height / box.Size.Height);
                                 Size newSize = new Size((int)Math.Round(box.Size.Width * scale), (int)Math.Round(box.Size.Height * scale));
-                                CvInvoke.Resize(tmp1, tmp2, newSize, 0, 0, Inter.Cubic);
+                                Emgu.CV.CvInvoke.Resize(tmp1, tmp2, newSize, 0, 0, Emgu.CV.CvEnum.Inter.Cubic);
 
                                 //removes some pixels from the edge
                                 int edgePixelSize = 3;
                                 Rectangle newRoi = new Rectangle(new Point(edgePixelSize, edgePixelSize),
                                    tmp2.Size - new Size(2 * edgePixelSize, 2 * edgePixelSize));
-                                UMat plate = new UMat(tmp2, newRoi);
+                                Emgu.CV.UMat plate = new Emgu.CV.UMat(tmp2, newRoi);
 
-                                UMat filteredPlate = FilterPlate(plate);
+                                Emgu.CV.UMat filteredPlate = FilterPlate(plate);
 
                                 //Tesseract.Character[] words;
                                 StringBuilder strBuilder = new StringBuilder();
-                                using (UMat tmp = filteredPlate.Clone())
+                                using (Emgu.CV.UMat tmp = filteredPlate.Clone())
                                 {
-                                    Emgu.CV.OCR.Tesseract.Character[] words;
+                                    //Emgu.CV.OCR.Tesseract.Character[] words;
 
-                                    _ocr.Recognize(tmp);
-                                    strBuilder.Append(_ocr.GetText());
+                                    //_ocr.Recognize(tmp);
+                                    //strBuilder.Append(_ocr.GetText());
 
-                                    words = _ocr.GetCharacters();
+                                    //words = _ocr.GetCharacters();
 
-                                    if (words.Length == 0) continue;
-
-                                    for (int i = 0; i < words.Length; i++)
-                                    {
-                                        strBuilder.Append(words[i].Text);
-                                    }
+                                    Tesseract.Page page = _ocr.Process(tmp.Bitmap, Tesseract.PageSegMode.SingleLine);
+                                    //if (page.get.Count == 0) continue;
+                                    //foreach (var item in words)
+                                    //{
+                                    //    strBuilder.Append(item.Text);
+                                    //}
+                                    //for (int i = 0; i < words.Length; i++)
+                                    //{
+                                    //    strBuilder.Append(words[i].Text);
+                                    //}
+                                    strBuilder.Append(page.GetText());
+                                    page.Dispose();
                                 }
 
                                 licenses.Add(strBuilder.ToString());
@@ -300,47 +304,47 @@ namespace Recognator
         /// </summary>
         /// <param name="plate">The license plate image</param>
         /// <returns>License plate image without the noise</returns>
-        private static UMat FilterPlate(UMat plate)
+        private static Emgu.CV.UMat FilterPlate(Emgu.CV.UMat plate)
         {
-            UMat thresh = new UMat();
-            CvInvoke.Threshold(plate, thresh, 120, 255, ThresholdType.BinaryInv);
+            Emgu.CV.UMat thresh = new Emgu.CV.UMat();
+            Emgu.CV.CvInvoke.Threshold(plate, thresh, 120, 255, Emgu.CV.CvEnum.ThresholdType.BinaryInv);
             //Image<Gray, Byte> thresh = plate.ThresholdBinaryInv(new Gray(120), new Gray(255));
 
             Size plateSize = plate.Size;
-            using (Mat plateMask = new Mat(plateSize.Height, plateSize.Width, DepthType.Cv8U, 1))
-            using (Mat plateCanny = new Mat())
-            using (VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint())
+            using (Emgu.CV.Mat plateMask = new Emgu.CV.Mat(plateSize.Height, plateSize.Width, Emgu.CV.CvEnum.DepthType.Cv8U, 1))
+            using (Emgu.CV.Mat plateCanny = new Emgu.CV.Mat())
+            using (Emgu.CV.Util.VectorOfVectorOfPoint contours = new Emgu.CV.Util.VectorOfVectorOfPoint())
             {
-                plateMask.SetTo(new MCvScalar(255.0));
+                plateMask.SetTo(new Emgu.CV.Structure.MCvScalar(255.0));
                 //поиск краёв
-                CvInvoke.Canny(plate, plateCanny, 100, 50);
+                Emgu.CV.CvInvoke.Canny(plate, plateCanny, 100, 50);
                 //контуры
-                CvInvoke.FindContours(plateCanny, contours, null, RetrType.External, ChainApproxMethod.ChainApproxSimple);
+                Emgu.CV.CvInvoke.FindContours(plateCanny, contours, null, Emgu.CV.CvEnum.RetrType.External, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
 
                 int count = contours.Size;
                 for (int i = 0; i < count; i++)
                 {
-                    using (VectorOfPoint contour = contours[i])
+                    using (Emgu.CV.Util.VectorOfPoint contour = contours[i])
                     {
                         //отрисовываем квадрат по контуру
-                        Rectangle rect = CvInvoke.BoundingRectangle(contour);
+                        Rectangle rect = Emgu.CV.CvInvoke.BoundingRectangle(contour);
                         if (rect.Height > (plateSize.Height >> 1))
                         {
                             rect.X -= 1; rect.Y -= 1; rect.Width += 2; rect.Height += 2;
                             Rectangle roi = new Rectangle(Point.Empty, plate.Size);
                             rect.Intersect(roi);
-                            CvInvoke.Rectangle(plateMask, rect, new MCvScalar(), -1);
+                            Emgu.CV.CvInvoke.Rectangle(plateMask, rect, new Emgu.CV.Structure.MCvScalar(), -1);
                             //plateMask.Draw(rect, new Gray(0.0), -1);
                         }
                     }
 
                 }
 
-                thresh.SetTo(new MCvScalar(), plateMask);
+                thresh.SetTo(new Emgu.CV.Structure.MCvScalar(), plateMask);
             }
 
-            CvInvoke.Erode(thresh, thresh, null, new Point(-1, -1), 1, BorderType.Constant, CvInvoke.MorphologyDefaultBorderValue);
-            CvInvoke.Dilate(thresh, thresh, null, new Point(-1, -1), 1, BorderType.Constant, CvInvoke.MorphologyDefaultBorderValue);
+            Emgu.CV.CvInvoke.Erode(thresh, thresh, null, new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Constant, Emgu.CV.CvInvoke.MorphologyDefaultBorderValue);
+            Emgu.CV.CvInvoke.Dilate(thresh, thresh, null, new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Constant, Emgu.CV.CvInvoke.MorphologyDefaultBorderValue);
 
             return thresh;
         }

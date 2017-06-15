@@ -14,9 +14,9 @@ namespace Recognator
     {
         private string path;
         private bool radChecked = false;
-        Settings PARRENT;
+        MainForm PARRENT;
 
-        public TeachPanel(Settings parrent)
+        public TeachPanel(MainForm parrent)
         {
             InitializeComponent();
             PARRENT = parrent;
@@ -42,7 +42,7 @@ namespace Recognator
         private void teach_panel_teachBtn_Click(object sender, EventArgs e)
         {
             PARRENT.container.Controls.Clear();
-            PARRENT.container.Controls.Add(new TeachingPanel());
+            PARRENT.container.Controls.Add(new TeachingPanel(path));
 
         }
     }

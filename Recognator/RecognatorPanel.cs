@@ -8,10 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Emgu.CV;
 using System.Diagnostics;
-using Emgu.CV.Structure;
-using Emgu.CV.Util;
 using System.Threading;
 using System.Text.RegularExpressions;
 
@@ -19,11 +16,11 @@ namespace Recognator
 {
     public partial class RecognatorPanel : UserControl
     {
-        Settings PARRENT;
+        MainForm PARRENT;
         _AddLabelAndImage _addLabelAndImage;
         _ClearPanel _clearPanel;
 
-        public RecognatorPanel(Settings parrent)
+        public RecognatorPanel(MainForm parrent)
         {
             InitializeComponent();
             PARRENT = parrent;
@@ -37,20 +34,6 @@ namespace Recognator
         private void panelLoad(object sender, EventArgs e)
         {
             Application.Idle += getFrame;
-            try
-            {
-                SqlCommand query = new SqlCommand("select number from License", PARRENT.connection);
-                PARRENT.reader = query.ExecuteReader();
-            }
-            catch (SqlException sql)
-            {
-
-                MessageBox.Show(sql.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Unknown error");
-            }
         }
 
         private void getFrame(object sender, EventArgs arg)
@@ -66,13 +49,14 @@ namespace Recognator
                         detectWorker.RunWorkerAsync();
                     }
                 }
+                Thread.Sleep(50);
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 Application.Idle -= getFrame;
                 PARRENT.capture.Stop();
                 PARRENT.capture.Dispose();
-                MessageBox.Show(e.Message);
+                
             }
         }
 
@@ -101,13 +85,13 @@ namespace Recognator
         {
             //panel1.Controls.Clear();
         }
-        private void ProcessImage(IInputOutputArray image)
+        private void ProcessImage(Emgu.CV.IInputOutputArray image)
         {
             Stopwatch watch = Stopwatch.StartNew(); // time the detection process
 
-            List<IInputOutputArray> licensePlateImagesList = new List<IInputOutputArray>();
-            List<IInputOutputArray> filteredLicensePlateImagesList = new List<IInputOutputArray>();
-            List<RotatedRect> licenseBoxList = new List<RotatedRect>();
+            List<Emgu.CV.IInputOutputArray> licensePlateImagesList = new List<Emgu.CV.IInputOutputArray>();
+            List<Emgu.CV.IInputOutputArray> filteredLicensePlateImagesList = new List<Emgu.CV.IInputOutputArray>();
+            List<Emgu.CV.Structure.RotatedRect> licenseBoxList = new List<Emgu.CV.Structure.RotatedRect>();
             List<string> words = PARRENT._recognator.DetectLicensePlate(
                image,
                licensePlateImagesList,
@@ -123,8 +107,8 @@ namespace Recognator
                 this.Controls.Owner.Invoke(new _ClearPanel(clearPanel));
                 for (int i = 0; i < words.Count; i++)
                 {
-                    Mat dest = new Mat();
-                    CvInvoke.VConcat(licensePlateImagesList[i], filteredLicensePlateImagesList[i], dest);
+                    Emgu.CV.Mat dest = new Emgu.CV.Mat();
+                    Emgu.CV.CvInvoke.VConcat(licensePlateImagesList[i], filteredLicensePlateImagesList[i], dest);
 
                     this.Controls.Owner.Invoke(_addLabelAndImage,
                                                       startPoint,
@@ -133,46 +117,52 @@ namespace Recognator
 
                     PointF[] verticesF = licenseBoxList[i].GetVertices();
                     Point[] vertices = Array.ConvertAll(verticesF, Point.Round);
-                    using (VectorOfPoint pts = new VectorOfPoint(vertices))
-                        CvInvoke.Polylines(image, pts, true, new Bgr(Color.Yellow).MCvScalar, 2);
+                    using (Emgu.CV.Util.VectorOfPoint pts = new Emgu.CV.Util.VectorOfPoint(vertices))
+                        Emgu.CV.CvInvoke.Polylines(image, pts, true, new Emgu.CV.Structure.Bgr(Color.Yellow).MCvScalar, 2);
 
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(500);
             }
 
         }
-        private delegate void _AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch);
-        private void AddLabelAndImage(ref Point startPoint, String labelText, IImage image, Stopwatch watch)
+        private delegate void _AddLabelAndImage(ref Point startPoint, String labelText, Emgu.CV.IImage image, Stopwatch watch);
+        private void AddLabelAndImage(ref Point startPoint, String labelText, Emgu.CV.IImage image, Stopwatch watch)
         {
             labelText = labelText.Replace(" ", "");
-            string str = PARRENT.regex.Match(labelText).ToString();
-            string str2 = Regex.Replace(labelText, str, String.Empty);
-            string str3 = PARRENT.regex2.Match(str2).ToString();
-
-            if (str != String.Empty)
+            labelText = labelText.Replace("\n", "");
+            labelText = labelText.Replace("\r", "");
+            labelText = labelText.Replace("-", "");
+            if (!labelText.Equals(String.Empty) && labelText.Length >= 6)
             {
-                plateMain_textBox.Text = str;
-                plateRegion_textBox.Text = str3;
+                string str = PARRENT.regex.Match(labelText).ToString();
+                str = str.Replace("Y", "У");
+                labelText = labelText.Replace("Y", "У");
+                string str2 = Regex.Replace(labelText, str, String.Empty);
+                string str3 = PARRENT.regex2.Match(str2).ToString();
 
-                if (PARRENT.dbConnect.Checked)
+                if (str != String.Empty)
                 {
+                    plateMain_textBox.Text = str;
+                    plateRegion_textBox.Text = str3;
 
-                    while (PARRENT.reader.Read())
+                    if (PARRENT.usData)
                     {
-                        if (PARRENT.reader[0].ToString().Equals(str + str3))
+                        while (PARRENT.reader.Read())
                         {
-                            label1.Visible = true;
-                            label2.Visible = false;
-                        }
-                        else
-                        {
-                            label2.Visible = true;
-                            label1.Visible = false;
+                            if (PARRENT.reader[0].ToString().Equals(str)) //для первой части номера, для начала
+                            {
+                                label1.Visible = true;
+                                label2.Visible = false;
+                            }
+                            else
+                            {
+                                label2.Visible = true;
+                                label1.Visible = false;
+                            }
                         }
                     }
                 }
             }
-
             //logBox.Text += "\n" + DateTime.Now + ": " + watch.ElapsedMilliseconds + "мс: [" + plateMain_textBox.Text + "|" + plateRegion_textBox.Text + "]";
 
         }
@@ -201,5 +191,12 @@ namespace Recognator
 
 
         #endregion
+
+        private void removed(object sender, ControlEventArgs e)
+        {
+            PARRENT.capture.Dispose();
+            PARRENT.m.Dispose();
+            pictureBox1.Dispose();
+        }
     }
 }

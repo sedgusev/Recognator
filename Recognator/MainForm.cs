@@ -1,5 +1,4 @@
-﻿using Emgu.CV;
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Recognator
 {
-    public partial class Settings : Form
+    public partial class MainForm : Form
     {
         //screens
         public LoginPanel lp;
@@ -30,13 +29,14 @@ namespace Recognator
         public string filePath;
         public SqlConnection connection;
         public RecognatorBrains _recognator;
-        public Mat m;
+        public Emgu.CV.Mat m;
         public Regex regex;
         public Regex regex2;
-        public string pattern = @"[A-Z][0-9][0-9][0-9][A-Z][A-Z]";
-        public string pattern2 = @"[0-9]{2,3}";
+        public string pattern = @"[A-Z|0][0-9|O][0-9|O][0-9|O][A-Z|0][A-Z|0]";
+        public string pattern2 = @"[0-9|O]{1,3}";
         public SqlDataReader reader;
         public string PAthToVideo;
+        public bool usData = false;
 
 
         //user settings default
@@ -46,7 +46,7 @@ namespace Recognator
         private string lv_PORT = "8080";
 
 
-        public Settings()
+        public MainForm()
         {
             InitializeComponent();
             initialLocals();
@@ -86,11 +86,56 @@ namespace Recognator
 
         private void cameraBtn_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                if (lp.dbConnect.Checked)
+                {
+                    connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+                    connection.Open();
+
+                    usData = true;
+                    SqlCommand query = new SqlCommand("select number from License", connection);
+                    reader = query.ExecuteReader();
+                }
+
+            }
+            catch (SqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unknown error");
+            }
             container.Controls.Clear();
             container.Controls.Add(cp);
         }
         private void demoBtn_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                if (lp.dbConnect.Checked)
+                {
+                    connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
+                    connection.Open();
+                    usData = true;
+                    SqlCommand query = new SqlCommand("select number from License", connection);
+                    reader = query.ExecuteReader();
+                }
+
+            }
+            catch (SqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unknown error");
+            }
             container.Controls.Clear();
             container.Controls.Add(dp);
         }
@@ -102,14 +147,7 @@ namespace Recognator
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                this.Close();
-            }
-            catch (Exception close)
-            {
-                MessageBox.Show(close.Message);
-            }
+            this.Close();
         }
 
         #endregion
@@ -244,28 +282,7 @@ namespace Recognator
             cp = new CameraPanel(this);
             dp = new DemoPanel(this);
             tp = new TeachPanel(this);
-
-            try
-            {
-                if (dbConnect.Checked)
-                {
-                    connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-
-                    connection.Open();
-
-                    SqlCommand query = new SqlCommand("select number from License", connection);
-                    reader = query.ExecuteReader();
-                }
-
-            }
-            catch (SqlException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Unknown error");
-            }
+            container.Controls.Add(lp);
         }
 
 
@@ -288,8 +305,8 @@ namespace Recognator
 
         private void formCLosing(object sender, FormClosingEventArgs e)
         {
-            capture.Dispose();
-            connection.Close();
+            if(capture != null) capture.Dispose();
+            if(connection != null) connection.Close();
         }
     }
 }

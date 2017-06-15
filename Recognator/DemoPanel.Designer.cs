@@ -54,7 +54,7 @@
             this.demo_panel_pathTb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.demo_panel_pathTb.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.demo_panel_pathTb.ForeColor = System.Drawing.Color.White;
-            this.demo_panel_pathTb.HintForeColor = System.Drawing.Color.Empty;
+            this.demo_panel_pathTb.HintForeColor = System.Drawing.Color.Gainsboro;
             this.demo_panel_pathTb.HintText = "Путь к видеофайлу";
             this.demo_panel_pathTb.isPassword = false;
             this.demo_panel_pathTb.LineFocusedColor = System.Drawing.Color.White;
@@ -66,7 +66,6 @@
             this.demo_panel_pathTb.Name = "demo_panel_pathTb";
             this.demo_panel_pathTb.Size = new System.Drawing.Size(224, 44);
             this.demo_panel_pathTb.TabIndex = 2;
-            this.demo_panel_pathTb.Text = "Путь к файлу";
             this.demo_panel_pathTb.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // openFileDialog1

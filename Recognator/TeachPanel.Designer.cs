@@ -31,17 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeachPanel));
             this.bunifuSeparator1 = new Bunifu.Framework.UI.BunifuSeparator();
             this.teach_panel_pathTb = new Bunifu.Framework.UI.BunifuMaterialTextbox();
-            this.teach_panel_switchT = new Bunifu.Framework.UI.BunifuiOSSwitch();
-            this.teach_panel_switchS = new Bunifu.Framework.UI.BunifuiOSSwitch();
             this.teach_panel_teachBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.teach_panel_dialogBtn = new Bunifu.Framework.UI.BunifuImageButton();
-            this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel2 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.selectFolder = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.teach_panel_dialogBtn)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bunifuSeparator1
@@ -61,7 +60,7 @@
             this.teach_panel_pathTb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.teach_panel_pathTb.Font = new System.Drawing.Font("Century Gothic", 9.75F);
             this.teach_panel_pathTb.ForeColor = System.Drawing.Color.White;
-            this.teach_panel_pathTb.HintForeColor = System.Drawing.Color.Empty;
+            this.teach_panel_pathTb.HintForeColor = System.Drawing.Color.Gainsboro;
             this.teach_panel_pathTb.HintText = "Путь к обучающей выборке";
             this.teach_panel_pathTb.isPassword = false;
             this.teach_panel_pathTb.LineFocusedColor = System.Drawing.Color.White;
@@ -73,38 +72,7 @@
             this.teach_panel_pathTb.Name = "teach_panel_pathTb";
             this.teach_panel_pathTb.Size = new System.Drawing.Size(224, 44);
             this.teach_panel_pathTb.TabIndex = 14;
-            this.teach_panel_pathTb.Text = "Путь к файлу";
             this.teach_panel_pathTb.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // teach_panel_switchT
-            // 
-            this.teach_panel_switchT.BackColor = System.Drawing.Color.Transparent;
-            this.teach_panel_switchT.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("teach_panel_switchT.BackgroundImage")));
-            this.teach_panel_switchT.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.teach_panel_switchT.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.teach_panel_switchT.Location = new System.Drawing.Point(140, 45);
-            this.teach_panel_switchT.Name = "teach_panel_switchT";
-            this.teach_panel_switchT.OffColor = System.Drawing.Color.Gray;
-            this.teach_panel_switchT.OnColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(202)))), ((int)(((byte)(94)))));
-            this.teach_panel_switchT.Size = new System.Drawing.Size(43, 25);
-            this.teach_panel_switchT.TabIndex = 20;
-            this.teach_panel_switchT.Value = true;
-            this.teach_panel_switchT.Click += new System.EventHandler(this.selectRadBtn);
-            // 
-            // teach_panel_switchS
-            // 
-            this.teach_panel_switchS.BackColor = System.Drawing.Color.Transparent;
-            this.teach_panel_switchS.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("teach_panel_switchS.BackgroundImage")));
-            this.teach_panel_switchS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.teach_panel_switchS.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.teach_panel_switchS.Location = new System.Drawing.Point(140, 15);
-            this.teach_panel_switchS.Name = "teach_panel_switchS";
-            this.teach_panel_switchS.OffColor = System.Drawing.Color.Gray;
-            this.teach_panel_switchS.OnColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(202)))), ((int)(((byte)(94)))));
-            this.teach_panel_switchS.Size = new System.Drawing.Size(43, 25);
-            this.teach_panel_switchS.TabIndex = 17;
-            this.teach_panel_switchS.Value = true;
-            this.teach_panel_switchS.Click += new System.EventHandler(this.selectRadBtn);
             // 
             // teach_panel_teachBtn
             // 
@@ -156,23 +124,12 @@
             this.teach_panel_dialogBtn.Zoom = 10;
             this.teach_panel_dialogBtn.Click += new System.EventHandler(this.teach_panel_dialogBtn_Click);
             // 
-            // bunifuCustomLabel1
-            // 
-            this.bunifuCustomLabel1.AutoSize = true;
-            this.bunifuCustomLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bunifuCustomLabel1.ForeColor = System.Drawing.Color.White;
-            this.bunifuCustomLabel1.Location = new System.Drawing.Point(116, 207);
-            this.bunifuCustomLabel1.Name = "bunifuCustomLabel1";
-            this.bunifuCustomLabel1.Size = new System.Drawing.Size(147, 18);
-            this.bunifuCustomLabel1.TabIndex = 22;
-            this.bunifuCustomLabel1.Text = "Функция активации:";
-            // 
             // bunifuCustomLabel2
             // 
             this.bunifuCustomLabel2.AutoSize = true;
             this.bunifuCustomLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bunifuCustomLabel2.ForeColor = System.Drawing.Color.White;
-            this.bunifuCustomLabel2.Location = new System.Drawing.Point(7, 22);
+            this.bunifuCustomLabel2.Location = new System.Drawing.Point(9, 36);
             this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
             this.bunifuCustomLabel2.Size = new System.Drawing.Size(119, 18);
             this.bunifuCustomLabel2.TabIndex = 23;
@@ -183,30 +140,55 @@
             this.bunifuCustomLabel3.AutoSize = true;
             this.bunifuCustomLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.bunifuCustomLabel3.ForeColor = System.Drawing.Color.White;
-            this.bunifuCustomLabel3.Location = new System.Drawing.Point(7, 52);
+            this.bunifuCustomLabel3.Location = new System.Drawing.Point(9, 66);
             this.bunifuCustomLabel3.Name = "bunifuCustomLabel3";
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(120, 18);
             this.bunifuCustomLabel3.TabIndex = 24;
             this.bunifuCustomLabel3.Text = "Тангенциальная";
             // 
-            // panel1
+            // groupBox1
             // 
-            this.panel1.Controls.Add(this.teach_panel_switchT);
-            this.panel1.Controls.Add(this.bunifuCustomLabel3);
-            this.panel1.Controls.Add(this.teach_panel_switchS);
-            this.panel1.Controls.Add(this.bunifuCustomLabel2);
-            this.panel1.Location = new System.Drawing.Point(119, 227);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(186, 88);
-            this.panel1.TabIndex = 25;
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.bunifuCustomLabel3);
+            this.groupBox1.Controls.Add(this.bunifuCustomLabel2);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.groupBox1.Location = new System.Drawing.Point(127, 215);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(173, 100);
+            this.groupBox1.TabIndex = 26;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Функция активации:";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(135, 41);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 25;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.selectRadBtn);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(135, 71);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(14, 13);
+            this.radioButton2.TabIndex = 26;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.selectRadBtn);
             // 
             // TeachPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(45)))), ((int)(((byte)(58)))));
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.bunifuCustomLabel1);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.bunifuSeparator1);
             this.Controls.Add(this.teach_panel_teachBtn);
             this.Controls.Add(this.teach_panel_dialogBtn);
@@ -214,24 +196,22 @@
             this.Name = "TeachPanel";
             this.Size = new System.Drawing.Size(725, 445);
             ((System.ComponentModel.ISupportInitialize)(this.teach_panel_dialogBtn)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private Bunifu.Framework.UI.BunifuiOSSwitch teach_panel_switchT;
         private Bunifu.Framework.UI.BunifuSeparator bunifuSeparator1;
-        private Bunifu.Framework.UI.BunifuiOSSwitch teach_panel_switchS;
         private Bunifu.Framework.UI.BunifuFlatButton teach_panel_teachBtn;
         private Bunifu.Framework.UI.BunifuImageButton teach_panel_dialogBtn;
         private Bunifu.Framework.UI.BunifuMaterialTextbox teach_panel_pathTb;
-        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel1;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel2;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel3;
         private System.Windows.Forms.FolderBrowserDialog selectFolder;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }

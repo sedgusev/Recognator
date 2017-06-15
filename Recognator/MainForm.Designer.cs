@@ -1,6 +1,6 @@
 ﻿namespace Recognator
 {
-    partial class Settings
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            AnimatorNS.Animation animation3 = new AnimatorNS.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
-            AnimatorNS.Animation animation4 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation2 = new AnimatorNS.Animation();
+            AnimatorNS.Animation animation1 = new AnimatorNS.Animation();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.sidepanel = new System.Windows.Forms.Panel();
             this.collapseBtn = new Bunifu.Framework.UI.BunifuFlatButton();
             this.homeBtn = new Bunifu.Framework.UI.BunifuFlatButton();
@@ -43,18 +43,15 @@
             this.minimizeBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.exitBtn = new Bunifu.Framework.UI.BunifuImageButton();
             this.animator1 = new AnimatorNS.Animator(this.components);
-            this.container = new System.Windows.Forms.Panel();
             this.errorPanel = new System.Windows.Forms.Panel();
             this.bunifuCustomLabel1 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.container = new System.Windows.Forms.Panel();
             this.SwitchAnimator = new AnimatorNS.Animator(this.components);
             this.captureLoadWorker = new System.ComponentModel.BackgroundWorker();
-            this.dbConnect = new Bunifu.Framework.UI.BunifuCheckbox();
-            this.bunifuCustomLabel2 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.sidepanel.SuspendLayout();
             this.header_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizeBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).BeginInit();
-            this.container.SuspendLayout();
             this.errorPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +139,7 @@
             this.homeBtn.Size = new System.Drawing.Size(209, 48);
             this.homeBtn.TabIndex = 15;
             this.homeBtn.Text = "Главная";
-            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.homeBtn.Textcolor = System.Drawing.Color.White;
             this.homeBtn.TextFont = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
@@ -158,7 +155,6 @@
             this.SwitchAnimator.SetDecoration(this.cameraBtn, AnimatorNS.DecorationType.None);
             this.animator1.SetDecoration(this.cameraBtn, AnimatorNS.DecorationType.None);
             this.cameraBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.cameraBtn.Enabled = false;
             this.cameraBtn.Iconcolor = System.Drawing.Color.Transparent;
             this.cameraBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("cameraBtn.Iconimage")));
             this.cameraBtn.Iconimage_right = null;
@@ -180,7 +176,7 @@
             this.cameraBtn.Size = new System.Drawing.Size(209, 48);
             this.cameraBtn.TabIndex = 14;
             this.cameraBtn.Text = "Камера";
-            this.cameraBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cameraBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cameraBtn.Textcolor = System.Drawing.Color.White;
             this.cameraBtn.TextFont = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cameraBtn.Click += new System.EventHandler(this.cameraBtn_Click);
@@ -196,7 +192,6 @@
             this.SwitchAnimator.SetDecoration(this.demoBtn, AnimatorNS.DecorationType.None);
             this.animator1.SetDecoration(this.demoBtn, AnimatorNS.DecorationType.None);
             this.demoBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.demoBtn.Enabled = false;
             this.demoBtn.Iconcolor = System.Drawing.Color.Transparent;
             this.demoBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("demoBtn.Iconimage")));
             this.demoBtn.Iconimage_right = null;
@@ -218,7 +213,7 @@
             this.demoBtn.Size = new System.Drawing.Size(209, 48);
             this.demoBtn.TabIndex = 13;
             this.demoBtn.Text = "Демонстрация";
-            this.demoBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.demoBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.demoBtn.Textcolor = System.Drawing.Color.White;
             this.demoBtn.TextFont = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.demoBtn.Click += new System.EventHandler(this.demoBtn_Click);
@@ -234,7 +229,6 @@
             this.SwitchAnimator.SetDecoration(this.settingsBtn, AnimatorNS.DecorationType.None);
             this.animator1.SetDecoration(this.settingsBtn, AnimatorNS.DecorationType.None);
             this.settingsBtn.DisabledColor = System.Drawing.Color.Gray;
-            this.settingsBtn.Enabled = false;
             this.settingsBtn.Iconcolor = System.Drawing.Color.Transparent;
             this.settingsBtn.Iconimage = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Iconimage")));
             this.settingsBtn.Iconimage_right = null;
@@ -256,7 +250,7 @@
             this.settingsBtn.Size = new System.Drawing.Size(209, 48);
             this.settingsBtn.TabIndex = 8;
             this.settingsBtn.Text = "Настройки";
-            this.settingsBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.settingsBtn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.settingsBtn.Textcolor = System.Drawing.Color.White;
             this.settingsBtn.TextFont = new System.Drawing.Font("Californian FB", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
@@ -290,7 +284,7 @@
             this.materialLabel1.Location = new System.Drawing.Point(36, 13);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(85, 18);
+            this.materialLabel1.Size = new System.Drawing.Size(86, 19);
             this.materialLabel1.TabIndex = 10;
             this.materialLabel1.Text = "Recognator";
             // 
@@ -329,34 +323,22 @@
             // 
             this.animator1.AnimationType = AnimatorNS.AnimationType.Mosaic;
             this.animator1.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 0F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 20;
-            animation3.Padding = new System.Windows.Forms.Padding(30);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.animator1.DefaultAnimation = animation3;
-            // 
-            // container
-            // 
-            this.container.Controls.Add(this.bunifuCustomLabel2);
-            this.container.Controls.Add(this.dbConnect);
-            this.SwitchAnimator.SetDecoration(this.container, AnimatorNS.DecorationType.None);
-            this.animator1.SetDecoration(this.container, AnimatorNS.DecorationType.None);
-            this.container.Dock = System.Windows.Forms.DockStyle.Right;
-            this.container.Location = new System.Drawing.Point(212, 68);
-            this.container.Name = "container";
-            this.container.Size = new System.Drawing.Size(725, 445);
-            this.container.TabIndex = 6;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 20;
+            animation2.Padding = new System.Windows.Forms.Padding(30);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.animator1.DefaultAnimation = animation2;
             // 
             // errorPanel
             // 
@@ -383,26 +365,36 @@
             this.bunifuCustomLabel1.TabIndex = 0;
             this.bunifuCustomLabel1.Text = "Ошибка загрузки видео...";
             // 
+            // container
+            // 
+            this.SwitchAnimator.SetDecoration(this.container, AnimatorNS.DecorationType.None);
+            this.animator1.SetDecoration(this.container, AnimatorNS.DecorationType.None);
+            this.container.Dock = System.Windows.Forms.DockStyle.Right;
+            this.container.Location = new System.Drawing.Point(212, 68);
+            this.container.Name = "container";
+            this.container.Size = new System.Drawing.Size(725, 445);
+            this.container.TabIndex = 6;
+            // 
             // SwitchAnimator
             // 
             this.SwitchAnimator.AnimationType = AnimatorNS.AnimationType.VertSlide;
             this.SwitchAnimator.Cursor = null;
-            animation4.AnimateOnlyDifferences = true;
-            animation4.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.BlindCoeff")));
-            animation4.LeafCoeff = 0F;
-            animation4.MaxTime = 1F;
-            animation4.MinTime = 0F;
-            animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicCoeff")));
-            animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicShift")));
-            animation4.MosaicSize = 0;
-            animation4.Padding = new System.Windows.Forms.Padding(0);
-            animation4.RotateCoeff = 0F;
-            animation4.RotateLimit = 0F;
-            animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.ScaleCoeff")));
-            animation4.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.SlideCoeff")));
-            animation4.TimeCoeff = 0F;
-            animation4.TransparencyCoeff = 0F;
-            this.SwitchAnimator.DefaultAnimation = animation4;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.SwitchAnimator.DefaultAnimation = animation1;
             // 
             // captureLoadWorker
             // 
@@ -412,34 +404,7 @@
             this.captureLoadWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.worker_ProgressChanged);
             this.captureLoadWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.worker_Completed);
             // 
-            // dbConnect
-            // 
-            this.dbConnect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
-            this.dbConnect.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
-            this.dbConnect.Checked = false;
-            this.dbConnect.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(205)))), ((int)(((byte)(117)))));
-            this.animator1.SetDecoration(this.dbConnect, AnimatorNS.DecorationType.None);
-            this.SwitchAnimator.SetDecoration(this.dbConnect, AnimatorNS.DecorationType.None);
-            this.dbConnect.ForeColor = System.Drawing.Color.White;
-            this.dbConnect.Location = new System.Drawing.Point(231, 172);
-            this.dbConnect.Name = "dbConnect";
-            this.dbConnect.Size = new System.Drawing.Size(20, 20);
-            this.dbConnect.TabIndex = 0;
-            // 
-            // bunifuCustomLabel2
-            // 
-            this.bunifuCustomLabel2.AutoSize = true;
-            this.animator1.SetDecoration(this.bunifuCustomLabel2, AnimatorNS.DecorationType.None);
-            this.SwitchAnimator.SetDecoration(this.bunifuCustomLabel2, AnimatorNS.DecorationType.None);
-            this.bunifuCustomLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.bunifuCustomLabel2.ForeColor = System.Drawing.Color.White;
-            this.bunifuCustomLabel2.Location = new System.Drawing.Point(257, 168);
-            this.bunifuCustomLabel2.Name = "bunifuCustomLabel2";
-            this.bunifuCustomLabel2.Size = new System.Drawing.Size(256, 24);
-            this.bunifuCustomLabel2.TabIndex = 1;
-            this.bunifuCustomLabel2.Text = "Использовать базу данных";
-            // 
-            // Settings
+            // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,7 +418,7 @@
             this.animator1.SetDecoration(this, AnimatorNS.DecorationType.None);
             this.SwitchAnimator.SetDecoration(this, AnimatorNS.DecorationType.None);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Settings";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор камеры";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formCLosing);
@@ -467,8 +432,6 @@
             this.header_panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.minimizeBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitBtn)).EndInit();
-            this.container.ResumeLayout(false);
-            this.container.PerformLayout();
             this.errorPanel.ResumeLayout(false);
             this.errorPanel.PerformLayout();
             this.ResumeLayout(false);
@@ -492,7 +455,5 @@
         public System.ComponentModel.BackgroundWorker captureLoadWorker;
         public System.Windows.Forms.Panel errorPanel;
         public System.Windows.Forms.Panel container;
-        private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel2;
-        public Bunifu.Framework.UI.BunifuCheckbox dbConnect;
     }
 }

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeachingPanel));
             this.teach_process_panel_progressbar = new Bunifu.Framework.UI.BunifuCircleProgressbar();
+            this.teachProcess = new System.ComponentModel.BackgroundWorker();
+            this.nameOfImage = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.SuspendLayout();
             // 
             // teach_process_panel_progressbar
@@ -44,30 +46,52 @@
             this.teach_process_panel_progressbar.LabelVisible = true;
             this.teach_process_panel_progressbar.LineProgressThickness = 8;
             this.teach_process_panel_progressbar.LineThickness = 5;
-            this.teach_process_panel_progressbar.Location = new System.Drawing.Point(252, 126);
+            this.teach_process_panel_progressbar.Location = new System.Drawing.Point(257, 90);
             this.teach_process_panel_progressbar.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.teach_process_panel_progressbar.MaxValue = 100;
             this.teach_process_panel_progressbar.Name = "teach_process_panel_progressbar";
             this.teach_process_panel_progressbar.ProgressBackColor = System.Drawing.Color.Gainsboro;
             this.teach_process_panel_progressbar.ProgressColor = System.Drawing.Color.SeaGreen;
-            this.teach_process_panel_progressbar.Size = new System.Drawing.Size(201, 201);
+            this.teach_process_panel_progressbar.Size = new System.Drawing.Size(198, 198);
             this.teach_process_panel_progressbar.TabIndex = 1;
             this.teach_process_panel_progressbar.Value = 1;
+            // 
+            // teachProcess
+            // 
+            this.teachProcess.WorkerReportsProgress = true;
+            this.teachProcess.DoWork += new System.ComponentModel.DoWorkEventHandler(this.doWork);
+            this.teachProcess.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.changeProgress);
+            this.teachProcess.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.completeWorker);
+            // 
+            // nameOfImage
+            // 
+            this.nameOfImage.AutoSize = true;
+            this.nameOfImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.nameOfImage.ForeColor = System.Drawing.Color.SeaGreen;
+            this.nameOfImage.Location = new System.Drawing.Point(255, 337);
+            this.nameOfImage.Name = "nameOfImage";
+            this.nameOfImage.Size = new System.Drawing.Size(0, 39);
+            this.nameOfImage.TabIndex = 2;
             // 
             // TeachingPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(45)))), ((int)(((byte)(58)))));
+            this.Controls.Add(this.nameOfImage);
             this.Controls.Add(this.teach_process_panel_progressbar);
             this.Name = "TeachingPanel";
             this.Size = new System.Drawing.Size(725, 445);
+            this.Load += new System.EventHandler(this.loadPanel);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private Bunifu.Framework.UI.BunifuCircleProgressbar teach_process_panel_progressbar;
+        private System.ComponentModel.BackgroundWorker teachProcess;
+        private Bunifu.Framework.UI.BunifuCustomLabel nameOfImage;
     }
 }
