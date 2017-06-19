@@ -49,7 +49,7 @@ namespace Recognator
                         detectWorker.RunWorkerAsync();
                     }
                 }
-                Thread.Sleep(50);
+                Thread.Sleep(2);
             }
             catch (NullReferenceException)
             {
@@ -147,19 +147,24 @@ namespace Recognator
 
                     if (PARRENT.usData)
                     {
-                        while (PARRENT.reader.Read())
+                        PARRENT.reader = PARRENT.query.ExecuteReader();
+                        if (PARRENT.reader != null)
                         {
-                            if (PARRENT.reader[0].ToString().Equals(str)) //для первой части номера, для начала
+                            while (PARRENT.reader.Read())
                             {
-                                label1.Visible = true;
-                                label2.Visible = false;
-                            }
-                            else
-                            {
-                                label2.Visible = true;
-                                label1.Visible = false;
+                                if (PARRENT.reader[0].ToString().Substring(0,6).Equals(str)) //для первой части номера, для начала
+                                {
+                                    label1.Visible = true;
+                                    label2.Visible = false;
+                                }
+                                else
+                                {
+                                    label2.Visible = true;
+                                    label1.Visible = false;
+                                }
                             }
                         }
+                        PARRENT.reader.Close();
                     }
                 }
             }

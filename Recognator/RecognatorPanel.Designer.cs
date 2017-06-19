@@ -72,12 +72,13 @@
             this.plateRegion_textBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.plateRegion_textBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.plateRegion_textBox.Enabled = false;
-            this.plateRegion_textBox.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.plateRegion_textBox.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.plateRegion_textBox.Location = new System.Drawing.Point(204, 23);
             this.plateRegion_textBox.Name = "plateRegion_textBox";
             this.plateRegion_textBox.ReadOnly = true;
-            this.plateRegion_textBox.Size = new System.Drawing.Size(41, 23);
+            this.plateRegion_textBox.Size = new System.Drawing.Size(41, 25);
             this.plateRegion_textBox.TabIndex = 2;
+            this.plateRegion_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // plateMain_textBox
             // 

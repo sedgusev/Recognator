@@ -37,6 +37,7 @@ namespace Recognator
         public SqlDataReader reader;
         public string PAthToVideo;
         public bool usData = false;
+        public SqlCommand query;
 
 
         //user settings default
@@ -91,13 +92,14 @@ namespace Recognator
             {
                 if (lp.dbConnect.Checked)
                 {
+
+
                     connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
 
                     connection.Open();
 
                     usData = true;
-                    SqlCommand query = new SqlCommand("select number from License", connection);
-                    reader = query.ExecuteReader();
+                    query = new SqlCommand("select number from Licenses", connection);
                 }
 
             }
@@ -119,12 +121,11 @@ namespace Recognator
             {
                 if (lp.dbConnect.Checked)
                 {
-                    connection = new SqlConnection("Server=tcp:sedgusev.database.windows.net,1433;Initial Catalog=recognatordb;Persist Security Info=False;User ID=sedgusev;Password=$IWM13d4;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                    connection = new SqlConnection("data source=tcp:sedgusev2.database.windows.net,1433;initial catalog=identitydb;persist security info=False;user id=sedgusev;password=$IWM13d4;multipleactiveresultsets=False;connect timeout=30;encrypt=True;trustservercertificate=False;App=EntityFramework");
 
                     connection.Open();
                     usData = true;
-                    SqlCommand query = new SqlCommand("select number from License", connection);
-                    reader = query.ExecuteReader();
+                    query = new SqlCommand("select number from Licenses", connection);
                 }
 
             }
@@ -232,8 +233,10 @@ namespace Recognator
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             if (capture != null) capture.Dispose();
-            if (flag) capture = new Emgu.CV.Capture("http://" + lv_USER + ":" + lv_PASSWORD + "@" + lv_IP + ":" + lv_PORT + "/video");
+            //if (flag) capture = new Emgu.CV.Capture("http://" + lv_USER + ":" + lv_PASSWORD + "@" + lv_IP + ":" + lv_PORT + "/video");
             if (!flag) capture = new Emgu.CV.Capture(filePath);
+            if (flag) capture = new Emgu.CV.Capture();
+            //if (flag) capture = new Emgu.CV.Capture("http://ivideon.com/my");
             if (capture.QueryFrame() != null)
             {
                 //rf.FormClosed += (a, b) =>

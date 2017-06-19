@@ -41,7 +41,7 @@
             // 
             this.PORT.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PORT.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.PORT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PORT.ForeColor = System.Drawing.Color.White;
             this.PORT.HintForeColor = System.Drawing.Color.White;
             this.PORT.HintText = "port";
             this.PORT.isPassword = false;
@@ -60,7 +60,7 @@
             // 
             this.IP.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.IP.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.IP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.IP.ForeColor = System.Drawing.Color.White;
             this.IP.HintForeColor = System.Drawing.Color.White;
             this.IP.HintText = "ip";
             this.IP.isPassword = false;
@@ -79,7 +79,7 @@
             // 
             this.PASSWORD.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PASSWORD.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.PASSWORD.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PASSWORD.ForeColor = System.Drawing.Color.White;
             this.PASSWORD.HintForeColor = System.Drawing.Color.White;
             this.PASSWORD.HintText = "password";
             this.PASSWORD.isPassword = true;
@@ -98,7 +98,7 @@
             // 
             this.USER.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.USER.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.USER.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.USER.ForeColor = System.Drawing.Color.White;
             this.USER.HintForeColor = System.Drawing.Color.White;
             this.USER.HintText = "username";
             this.USER.isPassword = false;

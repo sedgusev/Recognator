@@ -137,7 +137,7 @@ namespace Recognator
             using (Emgu.CV.Util.VectorOfVectorOfPoint contours = new Emgu.CV.Util.VectorOfVectorOfPoint())
             {
                 Emgu.CV.CvInvoke.CvtColor(img, gray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
-                Emgu.CV.CvInvoke.cvSetImageROI(gray,new Rectangle(100,60,400, 200));
+                //Emgu.CV.CvInvoke.cvSetImageROI(gray,new Rectangle(100,60,400, 200));
                 Emgu.CV.CvInvoke.Canny(gray, canny, 100, 50, 3, false);
                 int[,] hierachy = Emgu.CV.CvInvoke.FindContourTree(canny, contours, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
 

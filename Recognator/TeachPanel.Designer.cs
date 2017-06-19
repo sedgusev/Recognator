@@ -37,8 +37,8 @@
             this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
             this.selectFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.teach_panel_dialogBtn)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -117,7 +117,7 @@
             this.teach_panel_dialogBtn.ImageActive = null;
             this.teach_panel_dialogBtn.Location = new System.Drawing.Point(433, 125);
             this.teach_panel_dialogBtn.Name = "teach_panel_dialogBtn";
-            this.teach_panel_dialogBtn.Size = new System.Drawing.Size(44, 44);
+            this.teach_panel_dialogBtn.Size = new System.Drawing.Size(41, 44);
             this.teach_panel_dialogBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.teach_panel_dialogBtn.TabIndex = 15;
             this.teach_panel_dialogBtn.TabStop = false;
@@ -161,17 +161,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функция активации:";
             // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(135, 41);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(14, 13);
-            this.radioButton1.TabIndex = 25;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.selectRadBtn);
-            // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
@@ -182,6 +171,17 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.selectRadBtn);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(135, 41);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(14, 13);
+            this.radioButton1.TabIndex = 25;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.selectRadBtn);
             // 
             // TeachPanel
             // 

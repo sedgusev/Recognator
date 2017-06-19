@@ -37,12 +37,12 @@
             // 
             // demo_panel_dialogBtn
             // 
-            this.demo_panel_dialogBtn.BackColor = System.Drawing.Color.SeaGreen;
+            this.demo_panel_dialogBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(45)))), ((int)(((byte)(58)))));
             this.demo_panel_dialogBtn.Image = ((System.Drawing.Image)(resources.GetObject("demo_panel_dialogBtn.Image")));
             this.demo_panel_dialogBtn.ImageActive = null;
             this.demo_panel_dialogBtn.Location = new System.Drawing.Point(432, 174);
             this.demo_panel_dialogBtn.Name = "demo_panel_dialogBtn";
-            this.demo_panel_dialogBtn.Size = new System.Drawing.Size(64, 44);
+            this.demo_panel_dialogBtn.Size = new System.Drawing.Size(48, 44);
             this.demo_panel_dialogBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.demo_panel_dialogBtn.TabIndex = 3;
             this.demo_panel_dialogBtn.TabStop = false;

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Recognator.ConvolutionWeights" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAQAgAAAAMAAAAhAAAACAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>ConvolutionWeights.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.ConvolutionStep" Collapsed="true">
+    <Position X="0.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ConvolutionStep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.BitmapConverter" Collapsed="true">
+    <Position X="1.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAgAAAAAA=</HashCode>
+      <FileName>BitmapConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.BiasedWeights" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAQgAAAAAAgQAAAAAAAAAAAAAAAAAgBAAQAA=</HashCode>
+      <FileName>BiasedWeights.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.FeedForwardStep" Collapsed="true">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAA=</HashCode>
+      <FileName>FeedForwardStep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.FeedForwardWeights" Collapsed="true">
+    <Position X="2" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACEAAAAQBgBAAAMAAAAhAAAACCAAEAAAAAAAAQAAAA=</HashCode>
+      <FileName>FeedForwardWeights.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.LeNetConfiguration" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAEAACAAAAAAAAAABAAAgQAAAAgAAAA=</HashCode>
+      <FileName>LeNetConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.InputStep">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAQAAA=</HashCode>
+      <FileName>InputLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.LeNetNetwork">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pAEgAAEAAAAAADAIQkAIAAAQgACIAAAYBACAAAABREg=</HashCode>
+      <FileName>LeNetNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.TrainingResults">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>LeNetNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.LeNetSnapshot">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQAAgAAAAQAAIAAIAEAAAEAAYQIAAAAUARAA=</HashCode>
+      <FileName>LeNetSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Recognator.LeNetTrainer">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAABEAAAgAQAAAAAAAgAAAAAAgAAAAAAAAAQAAAA=</HashCode>
+      <FileName>LeNetTrainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Recognator.DataSetItem" Collapsed="true">
+    <Position X="0.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAQIAAAAgACAQQAKAAAAkAAAgIACAAAAAAIACAQ=</HashCode>
+      <FileName>DataSetItem.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
